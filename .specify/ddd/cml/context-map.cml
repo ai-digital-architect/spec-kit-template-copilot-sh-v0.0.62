@@ -1,0 +1,27 @@
+ContextMap [SystemName] {
+  contains [BoundedContext1], [BoundedContext2], [BoundedContext3]
+  
+  [BoundedContext1] [Pattern] [BoundedContext2] {
+    implementationTechnology "REST"
+    downstreamRights INFLUENCER
+    exposedAggregates [AggregateA], [AggregateB]
+  }
+  
+  [BoundedContext2] [ACL] -> [BoundedContext3]
+}
+
+BoundedContext [BoundedContext1] {
+  type FEATURE
+  domainVisionStatement "Purpose statement"
+  implementationTechnology "Technology stack"
+  
+  Aggregate [AggregateA] {
+    Entity [EntityName] {
+      aggregateRoot
+      - [attributeType] attribute
+    }
+    ValueObject [ValueObjectName]
+  }
+}
+
+/* Repeat for each bounded context */

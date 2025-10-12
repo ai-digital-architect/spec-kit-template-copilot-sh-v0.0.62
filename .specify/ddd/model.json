@@ -1,0 +1,271 @@
+{
+  "meta": {
+    "version": "2.0.0",
+    "mode": "requirements | repo",
+    "inputs": ["brief text" | "repo URL/path"],
+    "timestamp": "ISO 8601 timestamp",
+    "analysisScope": "full | partial",
+    "tokenBudget": "estimated tokens used"
+  },
+  
+  "ubiquitousLanguage": {
+    "globalTerms": [
+      {
+        "term": "string",
+        "definition": "string",
+        "aliases": ["string"],
+        "contexts": ["context names where this term is used"]
+      }
+    ]
+  },
+  
+  "domains": [
+    {
+      "name": "string",
+      "type": "core | supporting | generic",
+      "vision": "string",
+      "businessValue": "string",
+      "subdomains": [
+        {
+          "name": "string",
+          "type": "core | supporting | generic",
+          "description": "string"
+        }
+      ]
+    }
+  ],
+  
+  "boundedContexts": [
+    {
+      "name": "string",
+      "domain": "parent domain name",
+      "purpose": "single responsibility statement",
+      "responsibilities": ["list of responsibilities"],
+      "notResponsibleFor": ["explicit exclusions"],
+      "teamOwnership": "team name (if known)",
+      
+      "ubiquitousLanguage": [
+        {
+          "term": "string",
+          "definition": "string (context-specific)"
+        }
+      ],
+      
+      "relationships": {
+        "upstream": ["context names"],
+        "downstream": ["context names"]
+      },
+      
+      "aggregates": [
+        {
+          "name": "string",
+          "rootEntity": "entity name",
+          "purpose": "why this aggregate exists",
+          
+          "invariants": [
+            {
+              "rule": "string",
+              "enforcementPoint": "where/when enforced"
+            }
+          ],
+          
+          "entities": [
+            {
+              "name": "string",
+              "identity": "ID field(s)",
+              "attributes": ["field names with types"],
+              "behaviors": ["method names with intent"]
+            }
+          ],
+          
+          "valueObjects": [
+            {
+              "name": "string",
+              "attributes": ["field names with types"],
+              "validation": ["rules"],
+              "behaviors": ["method names"]
+            }
+          ],
+          
+          "consistencyBoundary": "description of transaction scope",
+          "consistencyModel": "strong | eventual"
+        }
+      ],
+      
+      "domainServices": [
+        {
+          "name": "string",
+          "purpose": "string",
+          "operations": [
+            {
+              "name": "string",
+              "input": "types",
+              "output": "type",
+              "sideEffects": "none | description"
+            }
+          ]
+        }
+      ],
+      
+      "applicationServices": [
+        {
+          "name": "string",
+          "purpose": "orchestration description",
+          "operations": [
+            {
+              "name": "string",
+              "intent": "what it coordinates",
+              "workflow": ["step 1", "step 2", "..."]
+            }
+          ]
+        }
+      ],
+      
+      "repositories": [
+        {
+          "name": "string",
+          "aggregateRoot": "aggregate name",
+          "methods": ["findById", "save", "delete", "..."]
+        }
+      ],
+      
+      "factories": [
+        {
+          "name": "string",
+          "creates": "aggregate or entity name",
+          "constructionRules": ["rule 1", "rule 2"]
+        }
+      ],
+      
+      "commands": [
+        {
+          "name": "string (imperative)",
+          "intent": "what user/system wants to do",
+          "targetAggregate": "aggregate name",
+          "payloadSchema": {
+            "type": "object",
+            "properties": {},
+            "required": []
+          },
+          "handler": "service or aggregate method",
+          "outcomes": ["success event", "failure scenarios"]
+        }
+      ],
+      
+      "events": [
+        {
+          "name": "string (past tense)",
+          "intent": "what happened",
+          "sourceAggregate": "aggregate name",
+          "payloadSchema": {
+            "type": "object",
+            "properties": {
+              "aggregateId": "string",
+              "aggregateVersion": "integer",
+              "data": {},
+              "metadata": {
+                "eventId": "string",
+                "correlationId": "string",
+                "causationId": "string",
+                "timestamp": "string"
+              }
+            }
+          },
+          "triggeredBy": "command or other event",
+          "consumedBy": ["policies", "sagas", "other contexts"]
+        }
+      ],
+      
+      "policies": [
+        {
+          "name": "string",
+          "trigger": "event name",
+          "condition": "when to execute (optional)",
+          "action": "command to issue or event to publish",
+          "synchronous": true
+        }
+      ],
+      
+      "sagas": [
+        {
+          "name": "string",
+          "purpose": "workflow description",
+          "trigger": "initiating event",
+          "steps": [
+            {
+              "stepNumber": 1,
+              "action": "command to issue",
+              "targetContext": "context name",
+              "onSuccess": "next step or event to wait for",
+              "onFailure": "compensation action"
+            }
+          ],
+          "timeout": "max duration",
+          "compensations": ["rollback steps"]
+        }
+      ],
+      
+      "apis": [
+        {
+          "name": "string",
+          "style": "REST | gRPC | GraphQL | Events | MDSL",
+          "contractLocation": "file path reference",
+          "endpoints": [
+            {
+              "path": "string",
+              "method": "GET | POST | PUT | DELETE",
+              "operation": "command or query name",
+              "authentication": "required | optional | none"
+            }
+          ],
+          "versioning": "strategy description",
+          "idempotency": "strategy description"
+        }
+      ],
+      
+      "consistency": {
+        "internalModel": "strong | eventual | mixed",
+        "crossAggregateModel": "eventual",
+        "transactionStrategy": "description",
+        "idempotencyStrategy": "description",
+        "retryPolicy": "description",
+        "eventOrdering": "per-aggregate | global | none"
+      }
+    }
+  ],
+  
+  "relationships": [
+    {
+      "upstream": "context name",
+      "downstream": "context name",
+      "pattern": "Customer-Supplier | Conformist | Shared Kernel | ACL | OHS | Published Language",
+      "rationale": "why this pattern was chosen",
+      "contract": {
+        "type": "OpenAPI | AsyncAPI | MDSL | Events | Shared Code",
+        "location": "file reference",
+        "versioningStrategy": "strategy description"
+      },
+      "governance": "who owns what, change process",
+      "notes": "additional context"
+    }
+  ],
+  
+  "nonFunctionalConstraints": [
+    {
+      "category": "performance | security | scalability | compliance | ...",
+      "requirement": "specific constraint",
+      "rationale": "why this matters",
+      "designImpact": "how this shaped the design"
+    }
+  ],
+  
+  "assumptions": [
+    "Assumption 1 with brief rationale",
+    "Assumption 2 with brief rationale"
+  ],
+  
+  "openQuestions": [
+    "Question 1 for stakeholders",
+    "Question 2 for technical review"
+  ]
+}
