@@ -1,0 +1,3397 @@
+# DDD Templates Collection
+# Place these files in: .specify/templates/ddd/
+
+# ============================================================
+# FILE: context-map-template.md
+# ============================================================
+---
+title: "Context Map: [System Name]"
+version: "1.0.0"
+date: "YYYY-MM-DD"
+status: "draft | review | approved"
+---
+
+# Context Map: [System Name]
+
+## Overview
+[Brief description of the overall system and its domain landscape]
+
+## Bounded Contexts
+
+### [Bounded Context Name 1]
+- **Type**: Core | Supporting | Generic
+- **Team**: [Team Name]
+- **Technology**: [Tech stack]
+- **Purpose**: [Single responsibility statement]
+
+### [Bounded Context Name 2]
+- **Type**: Core | Supporting | Generic
+- **Team**: [Team Name]
+- **Technology**: [Tech stack]
+- **Purpose**: [Single responsibility statement]
+
+[Repeat for all contexts]
+
+## Context Relationships
+
+### [Upstream Context] → [Downstream Context]
+
+**Pattern**: Customer-Supplier | Conformist | Shared Kernel | ACL | OHS | Published Language
+
+**Description**: [Why this relationship exists and what flows between contexts]
+
+**Contract**:
+- **Type**: REST API | Events | Shared Library | gRPC | GraphQL
+- **Location**: [Path to contract specification]
+- **Versioning**: [Strategy]
+
+**Governance**:
+- **Upstream Rights**: [What upstream can change unilaterally]
+- **Downstream Rights**: [What downstream can influence]
+- **Change Process**: [How changes are negotiated/communicated]
+
+**Integration Points**:
+- [Specific API endpoints, events, or shared modules]
+
+[Repeat for all relationships]
+
+## Strategic Patterns Summary
+
+| Upstream | Downstream | Pattern | Contract | Maturity |
+|----------|------------|---------|----------|----------|
+| [Context A] | [Context B] | Customer-Supplier | REST API | Stable |
+| [Context C] | [Context D] | Conformist | Events | Evolving |
+
+## Organizational Alignment
+
+| Bounded Context | Team | Deployment | Data Store |
+|-----------------|------|------------|------------|
+| [Context A] | [Team 1] | [Independent/Shared] | [Database] |
+| [Context B] | [Team 2] | [Independent/Shared] | [Database] |
+
+## Evolution & Migration Notes
+
+[Describe planned changes to context boundaries or relationships]
+
+- **Short-term** (0-3 months): [Planned changes]
+- **Medium-term** (3-12 months): [Planned changes]
+- **Long-term** (12+ months): [Vision]
+
+## Open Questions
+
+1. [Question about context boundary]
+2. [Question about relationship pattern]
+
+## References
+
+- [Link to detailed bounded context specifications]
+- [Link to API contracts]
+- [Link to architecture decision records]
+
+---
+
+# ============================================================
+# FILE: bounded-context-template.md
+# ============================================================
+---
+title: "Bounded Context: [Context Name]"
+domain: "[Parent Domain]"
+type: "core | supporting | generic"
+version: "1.0.0"
+status: "draft | review | approved"
+team: "[Team Name]"
+---
+
+# Bounded Context: [Context Name]
+
+## Purpose & Scope
+
+**Purpose**: [Single, clear responsibility statement]
+
+**In Scope**:
+- [Responsibility 1]
+- [Responsibility 2]
+- [Responsibility 3]
+
+**Explicitly Out of Scope**:
+- [What this context does NOT handle]
+- [Boundaries with other contexts]
+
+## Ubiquitous Language
+
+| Term | Definition | Aliases | Notes |
+|------|------------|---------|-------|
+| [Term 1] | [Context-specific definition] | [Alt names] | [Usage notes] |
+| [Term 2] | [Context-specific definition] | [Alt names] | [Usage notes] |
+
+## Strategic Context
+
+**Domain**: [Core, Supporting, or Generic]
+
+**Business Value**: [Why this context matters to the business]
+
+**Change Cadence**: [How frequently requirements change: High/Medium/Low]
+
+**Team Ownership**: [Team name and contact]
+
+## Relationships
+
+### Upstream Dependencies
+| Context | Pattern | Contract | Critical? |
+|---------|---------|----------|-----------|
+| [Context A] | [Pattern] | [API/Events] | Yes/No |
+
+### Downstream Consumers
+| Context | Pattern | Contract | Critical? |
+|---------|---------|----------|-----------|
+| [Context B] | [Pattern] | [API/Events] | Yes/No |
+
+### Partnerships
+| Context | Pattern | Shared Elements |
+|---------|---------|-----------------|
+| [Context C] | Shared Kernel | [Shared models/libs] |
+
+## Aggregates
+
+### [Aggregate Name 1]
+- **Root Entity**: [Entity Name]
+- **Purpose**: [Why this aggregate exists]
+- **Key Invariants**: [Rules that must always be true]
+- **See**: [Link to aggregate-[name].md]
+
+### [Aggregate Name 2]
+- **Root Entity**: [Entity Name]
+- **Purpose**: [Why this aggregate exists]
+- **Key Invariants**: [Rules that must always be true]
+- **See**: [Link to aggregate-[name].md]
+
+## Domain Services
+
+### [Service Name]
+- **Purpose**: [What business logic this encapsulates]
+- **Operations**: [Key operations]
+- **Stateless**: Yes
+- **See**: [Link to domain-services-[name].md]
+
+## Application Services
+
+### [Service Name]
+- **Purpose**: [What workflow this orchestrates]
+- **Coordinates**: [Which aggregates/services]
+- **See**: [Link to application-services-[name].md]
+
+## Events & Commands
+
+**Commands** (Intent to change state):
+- [CommandName]: [Brief description]
+- [CommandName]: [Brief description]
+
+**Domain Events** (Facts about what happened):
+- [EventName]: [Brief description]
+- [EventName]: [Brief description]
+
+**See**: [Link to events-and-commands-[context].md]
+
+## APIs & Contracts
+
+### [API Name]
+- **Style**: REST | gRPC | GraphQL | Event-Driven
+- **Contract**: [Link to OpenAPI/AsyncAPI/MDSL spec]
+- **Versioning**: [Strategy]
+- **Authentication**: [Method]
+
+## Consistency & Transactions
+
+**Internal Consistency**: Strong | Eventual | Mixed
+
+**Transaction Boundaries**: [Description of what's updated atomically]
+
+**Cross-Aggregate Consistency**: Eventual (via domain events)
+
+**Idempotency**: [Strategy for ensuring operations are idempotent]
+
+**See**: [Link to consistency-[context].md]
+
+## Non-Functional Constraints
+
+| Category | Requirement | Rationale | Design Impact |
+|----------|-------------|-----------|---------------|
+| Performance | [e.g., <100ms p99] | [Why] | [How design addresses] |
+| Scalability | [e.g., 10K req/s] | [Why] | [How design addresses] |
+| Security | [e.g., PCI compliance] | [Why] | [How design addresses] |
+
+## Technology Choices
+
+- **Language/Framework**: [e.g., Java/Spring Boot]
+- **Data Store**: [e.g., PostgreSQL]
+- **Messaging**: [e.g., Kafka, RabbitMQ]
+- **Deployment**: [e.g., Kubernetes, serverless]
+
+## Testing Strategy
+
+- **Unit Tests**: [Aggregate invariants, domain logic]
+- **Integration Tests**: [Repository, external APIs]
+- **Contract Tests**: [APIs consumed by other contexts]
+- **Event Tests**: [Event publishing/handling]
+
+## References
+
+- [Link to aggregate specifications]
+- [Link to API contracts]
+- [Link to architecture decision records]
+- [Link to context map]
+
+---
+
+# ============================================================
+# FILE: subdomain-template.md
+# ============================================================
+---
+title: "Subdomain: [Subdomain Name]"
+domain: "[Parent Domain]"
+type: "core | supporting | generic"
+version: "1.0.0"
+---
+
+# Subdomain: [Subdomain Name]
+
+## Classification
+
+**Type**: Core | Supporting | Generic
+
+**Rationale**: [Why this subdomain falls into this category]
+
+## Description
+
+[2-3 sentence description of what this subdomain encompasses]
+
+## Business Capabilities
+
+- [Capability 1]: [Description]
+- [Capability 2]: [Description]
+- [Capability 3]: [Description]
+
+## Key Concepts
+
+- **[Concept 1]**: [Definition]
+- **[Concept 2]**: [Definition]
+- **[Concept 3]**: [Definition]
+
+## Bounded Contexts
+
+This subdomain is realized by the following bounded contexts:
+
+### [Bounded Context Name 1]
+- **Responsibility**: [What it handles]
+- **Status**: [Existing | Planned]
+- **See**: [Link to bounded-context-[name].md]
+
+### [Bounded Context Name 2]
+- **Responsibility**: [What it handles]
+- **Status**: [Existing | Planned]
+- **See**: [Link to bounded-context-[name].md]
+
+## Strategic Importance
+
+**Business Value**: [High | Medium | Low]
+
+**Competitive Advantage**: [How this differentiates the business, if core]
+
+**Investment Priority**: [High | Medium | Low]
+
+**Evolution Strategy**:
+- [For Core]: Invest in custom solution, continuous improvement
+- [For Supporting]: Build if necessary, consider buy vs. build
+- [For Generic]: Prefer off-the-shelf or open-source solutions
+
+## Relationships with Other Subdomains
+
+| Subdomain | Relationship | Notes |
+|-----------|--------------|-------|
+| [Subdomain A] | [Depends on | Supports | Independent] | [Context] |
+
+## Open Questions
+
+1. [Question about subdomain boundaries]
+2. [Question about classification]
+
+---
+
+# ============================================================
+# FILE: aggregate-template.md
+# ============================================================
+---
+title: "Aggregate: [Aggregate Name]"
+context: "[Bounded Context Name]"
+root: "[Root Entity Name]"
+version: "1.0.0"
+status: "draft | review | approved"
+---
+
+# Aggregate: [Aggregate Name]
+
+## Purpose
+
+[Why this aggregate exists and what business concept it represents]
+
+## Aggregate Root
+
+**Entity**: [Root Entity Name]
+
+**Identity**: [How instances are uniquely identified]
+
+**Lifecycle**: [Creation → States → Termination]
+
+## Structure
+
+```
+[AggregateRoot]
+├── [Entity1]
+│   └── [ValueObject1]
+├── [Entity2]
+└── [ValueObject2]
+```
+
+## Invariants
+
+Business rules that MUST always be true within this aggregate:
+
+1. **[Invariant Name]**
+   - **Rule**: [Precise statement of the rule]
+   - **Enforcement Point**: [Where/when this is checked]
+   - **Violation Outcome**: [What happens if violated]
+
+2. **[Invariant Name]**
+   - **Rule**: [Precise statement of the rule]
+   - **Enforcement Point**: [Where/when this is checked]
+   - **Violation Outcome**: [What happens if violated]
+
+## Transaction Boundary
+
+**Scope**: [What's included in a single atomic transaction]
+
+**Consistency**: Strong (within aggregate boundary)
+
+**Concurrency**: [Optimistic locking | Pessimistic locking | Version-based]
+
+## Entities
+
+### [Entity Name]
+- **Identity**: [ID field(s)]
+- **Attributes**: [Key attributes with types]
+- **Behaviors**: [Key methods]
+- **Lifecycle**: [State transitions]
+- **See**: [Link to entity-[name].md]
+
+[Repeat for all entities]
+
+## Value Objects
+
+### [Value Object Name]
+- **Attributes**: [All attributes with types]
+- **Immutable**: Yes
+- **Validation**: [Rules for valid instances]
+- **Behaviors**: [Methods, if any]
+- **See**: [Link to value-object-[name].md]
+
+[Repeat for all value objects]
+
+## Behavior
+
+### Commands Accepted
+
+#### [CommandName]
+- **Intent**: [What the user/system wants to do]
+- **Preconditions**: [What must be true before execution]
+- **Payload**: 
+  ```json
+  {
+    "aggregateId": "string",
+    "field1": "type",
+    "field2": "type"
+  }
+  ```
+- **Validation**: [Business rules checked]
+- **Outcome**: [Success event(s) or failure scenarios]
+- **Handler**: [Method name on aggregate root]
+
+[Repeat for all commands]
+
+### Events Published
+
+#### [EventName]
+- **Triggered By**: [Which command or state change]
+- **Intent**: [What happened]
+- **Payload**:
+  ```json
+  {
+    "aggregateId": "string",
+    "aggregateVersion": "integer",
+    "field1": "type",
+    "field2": "type",
+    "metadata": {
+      "eventId": "string",
+      "correlationId": "string",
+      "causationId": "string",
+      "timestamp": "ISO 8601"
+    }
+  }
+  ```
+- **Consumers**: [Policies, sagas, other contexts]
+
+[Repeat for all events]
+
+## Repository
+
+**Interface**: [Repository name]
+
+**Methods**:
+- `findById(id: AggregateId): Aggregate | null`
+- `save(aggregate: Aggregate): void`
+- `delete(id: AggregateId): void`
+- [Additional query methods if needed]
+
+**Implementation Notes**: [Technology, caching strategy, etc.]
+
+## Factory
+
+**Factory**: [Factory name, if complex construction needed]
+
+**Creation Rules**:
+- [Rule 1 for valid initial state]
+- [Rule 2 for valid initial state]
+
+**Factory Method**: `create(...): Aggregate`
+
+## Cross-Aggregate Coordination
+
+**Other Aggregates Involved**:
+- [Aggregate B]: [How coordination happens - via events, saga, etc.]
+
+**Eventual Consistency**:
+- [Event X] triggers [Policy/Saga Y] which coordinates with [Aggregate Z]
+
+## State Diagram
+
+```
+[Initial State]
+    |
+    v
+[State 1] --[Event A]--> [State 2]
+    |
+    +--[Event B]--> [State 3]
+                        |
+                        v
+                   [Terminal State]
+```
+
+## Design Decisions
+
+### Size & Boundary Rationale
+[Why this aggregate includes what it does and excludes what it doesn't]
+
+### Performance Considerations
+[Caching, query optimization, denormalization needs]
+
+### Scalability Considerations
+[Sharding strategy, if applicable]
+
+## Examples
+
+### Example 1: [Scenario Name]
+```
+Given: [Initial state]
+When: [Command is executed]
+Then: [Expected outcome and events]
+```
+
+### Example 2: [Scenario Name]
+```
+Given: [Initial state]
+When: [Command is executed]
+Then: [Expected outcome and events]
+```
+
+## Testing Strategy
+
+- **Unit Tests**: Invariant enforcement, state transitions, command validation
+- **Integration Tests**: Repository persistence, event publishing
+- **Property-Based Tests**: Invariant preservation across random command sequences
+
+## References
+
+- [Link to entities]
+- [Link to value objects]
+- [Link to domain events]
+- [Link to bounded context]
+
+---
+
+# ============================================================
+# FILE: entity-template.md
+# ============================================================
+---
+title: "Entity: [Entity Name]"
+context: "[Bounded Context Name]"
+aggregate: "[Aggregate Name]"
+version: "1.0.0"
+---
+
+# Entity: [Entity Name]
+
+## Definition
+
+[1-2 sentence description of what this entity represents in the domain]
+
+## Identity
+
+**Unique Identifier**: [Field name and type, e.g., orderId: UUID]
+
+**Identity Generation**: [How IDs are created: auto-increment, UUID, domain-specific]
+
+**Identity Immutability**: [Can ID change? Usually no]
+
+## Attributes
+
+| Attribute | Type | Mutable | Required | Default | Validation |
+|-----------|------|---------|----------|---------|------------|
+| [attr1] | [type] | Yes/No | Yes/No | [value] | [rules] |
+| [attr2] | [type] | Yes/No | Yes/No | [value] | [rules] |
+
+### Attribute Details
+
+#### [Attribute Name]
+- **Purpose**: [Why this attribute exists]
+- **Constraints**: [Min/max, format, referential integrity]
+- **Business Rules**: [Domain-specific rules]
+
+[Repeat for complex attributes]
+
+## Lifecycle
+
+**Creation**: [How instances are created]
+- Via: [Factory | Constructor | Repository]
+- Required Data: [Minimum data needed]
+- Initial State: [Default state]
+
+**State Transitions**:
+```
+[State 1] --[action/event]--> [State 2] --[action/event]--> [State 3]
+```
+
+**Termination**: [Can entity be deleted? Soft delete? Hard delete?]
+
+## Behaviors
+
+### [Method Name]
+```
+method(param1: Type, param2: Type): ReturnType
+```
+- **Intent**: [What business operation this represents]
+- **Preconditions**: [What must be true before calling]
+- **Postconditions**: [What's guaranteed after execution]
+- **Side Effects**: [State changes, events published]
+- **Invariants Enforced**: [Which aggregate invariants this protects]
+
+[Repeat for all methods]
+
+## Relationships
+
+### Within Aggregate
+- **Contains**: [[ValueObject], [ChildEntity]]
+- **References**: [[OtherEntity] via [field]]
+
+### Across Aggregates
+- **References by ID Only**: [[AggregateRoot] via [aggregateId: UUID]]
+- **Coordination**: [Via events, not direct calls]
+
+## Validation Rules
+
+### Business Rules
+1. [Rule 1: e.g., "quantity must be positive"]
+2. [Rule 2: e.g., "status transitions must follow state machine"]
+
+### Technical Constraints
+1. [Constraint 1: e.g., "email must be valid format"]
+2. [Constraint 2: e.g., "maximum length 255 characters"]
+
+## Events
+
+### Published Events
+- **[EventName]**: [When this is published, what data included]
+
+### Consumed Events
+- **[EventName]**: [How this entity reacts to external events]
+
+## Persistence Mapping
+
+**Table/Collection**: [Database table or collection name]
+
+**Primary Key**: [Field(s)]
+
+**Indexes**: [Fields that should be indexed]
+
+**Relationships**: [Foreign keys, joins, embedded documents]
+
+## Examples
+
+### Example 1: Valid Instance
+```json
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "field1": "value1",
+  "field2": 42,
+  "status": "ACTIVE",
+  "createdAt": "2025-01-15T10:30:00Z"
+}
+```
+
+### Example 2: State Transition
+```
+Given: Entity in state "PENDING"
+When: approve() is called
+Then: State changes to "APPROVED", ApprovedEvent is published
+```
+
+## Design Decisions
+
+**Why Entity (not Value Object)?**
+[Justification: has identity, mutable, lifecycle matters]
+
+**Why in This Aggregate?**
+[Justification: invariants, transactional consistency needs]
+
+## References
+
+- [Link to aggregate]
+- [Link to value objects]
+- [Link to domain events]
+
+---
+
+# ============================================================
+# FILE: value-object-template.md
+# ============================================================
+---
+title: "Value Object: [Value Object Name]"
+context: "[Bounded Context Name]"
+aggregate: "[Aggregate Name (if part of one)]"
+version: "1.0.0"
+---
+
+# Value Object: [Value Object Name]
+
+## Definition
+
+[1-2 sentence description of what this value object represents]
+
+## Characteristics
+
+- **Immutable**: Yes (all value objects are immutable)
+- **Identified By**: Attributes (not identity)
+- **Equality**: Two instances with same attributes are considered equal
+- **Side-Effect Free**: Methods return new instances, never mutate
+
+## Attributes
+
+| Attribute | Type | Required | Validation |
+|-----------|------|----------|------------|
+| [attr1] | [type] | Yes/No | [rules] |
+| [attr2] | [type] | Yes/No | [rules] |
+
+### Attribute Details
+
+#### [Attribute Name]
+- **Purpose**: [Why this attribute exists]
+- **Constraints**: [Format, range, allowed values]
+- **Examples**: [Valid examples]
+
+[Repeat for each attribute]
+
+## Validation Rules
+
+Value objects must be **always valid**. Invalid instances should never exist.
+
+### Validation at Construction
+1. [Rule 1: e.g., "amount must be non-negative"]
+2. [Rule 2: e.g., "currency code must be ISO 4217"]
+3. [Rule 3: e.g., "email must match regex pattern"]
+
+### Invariants
+- [Invariant 1: e.g., "start date must be before end date"]
+- [Invariant 2: e.g., "latitude must be between -90 and 90"]
+
+## Behaviors
+
+### [Method Name]
+```
+method(param: Type): ValueObject
+```
+- **Intent**: [What operation this represents]
+- **Returns**: [New value object instance]
+- **Pure Function**: Yes (no side effects)
+- **Example**: 
+  ```
+  money.add(otherMoney) → new Money(sum)
+  ```
+
+[Repeat for all methods]
+
+## Creation
+
+### Constructor / Factory
+```
+create(attr1: Type, attr2: Type): Result<ValueObject, ValidationError>
+```
+- **Validates**: [All rules checked at construction]
+- **Throws/Returns Error**: If validation fails
+- **Example**:
+  ```
+  Money.create(100, "USD") → Money{amount: 100, currency: "USD"}
+  Money.create(-50, "USD") → Error("Amount must be positive")
+  ```
+
+### Named Constructors (Optional)
+- `fromString(str: string): Result<ValueObject, Error>`
+- `fromJSON(json: object): Result<ValueObject, Error>`
+
+## Equality & Comparison
+
+### Equality
+Two instances are equal if **all attributes** are equal.
+
+```
+Money(100, "USD") == Money(100, "USD")  → true
+Money(100, "USD") == Money(100, "EUR")  → false
+```
+
+### Comparison (if applicable)
+If value object can be ordered:
+```
+Money(100, "USD") < Money(200, "USD")  → true
+```
+
+## Serialization
+
+### To Primitive
+```json
+{
+  "field1": "value1",
+  "field2": 42
+}
+```
+
+### From Primitive
+```
+ValueObject.fromJSON(json) → ValueObject instance
+```
+
+## Usage Examples
+
+### Example 1: Creation
+```typescript
+const email = Email.create("user@example.com");
+// Returns: Email{value: "user@example.com"}
+
+const invalidEmail = Email.create("not-an-email");
+// Returns: Error("Invalid email format")
+```
+
+### Example 2: Immutability
+```typescript
+const money1 = Money.create(100, "USD");
+const money2 = money1.add(Money.create(50, "USD"));
+// money1 is unchanged: Money(100, "USD")
+// money2 is new instance: Money(150, "USD")
+```
+
+### Example 3: Equality
+```typescript
+const addr1 = Address.create("123 Main St", "Springfield", "IL", "62701");
+const addr2 = Address.create("123 Main St", "Springfield", "IL", "62701");
+addr1.equals(addr2); // true
+```
+
+## Common Patterns
+
+### Money Pattern
+```
+Money {
+  amount: Decimal,
+  currency: CurrencyCode
+}
+Methods: add, subtract, multiply, divide, isZero, isPositive
+```
+
+### Range Pattern
+```
+DateRange {
+  start: Date,
+  end: Date
+}
+Invariant: start <= end
+Methods: contains, overlaps, duration
+```
+
+### Measurement Pattern
+```
+Temperature {
+  value: Decimal,
+  unit: "C" | "F" | "K"
+}
+Methods: convertTo, compare
+```
+
+## Design Decisions
+
+**Why Value Object (not Entity)?**
+- No intrinsic identity needed
+- Equality is by attributes
+- Immutability is desired
+- Can be freely replaced
+
+**Why Not Primitive Type?**
+- Domain concept deserves explicit representation
+- Encapsulates validation logic
+- Provides domain-specific operations
+- Makes code more expressive
+
+## Testing Strategy
+
+- **Unit Tests**: Validation rules, all operations, equality
+- **Property-Based Tests**: Immutability, associativity, commutativity (where applicable)
+- **Example-Based Tests**: Edge cases, boundary values
+
+## References
+
+- [Link to entity or aggregate that uses this]
+- [Link to bounded context]
+- [Domain glossary entry]
+
+---
+
+# ============================================================
+# FILE: domain-service-template.md
+# ============================================================
+---
+title: "Domain Service: [Service Name]"
+context: "[Bounded Context Name]"
+version: "1.0.0"
+type: "domain-service"
+---
+
+# Domain Service: [Service Name]
+
+## Purpose
+
+[Why this service exists - what domain logic doesn't naturally fit in an entity or value object]
+
+## Characteristics
+
+- **Stateless**: Yes (no instance state)
+- **Pure Domain Logic**: Yes (no infrastructure concerns)
+- **Operates On**: [Which entities/value objects/aggregates]
+- **Layer**: Domain Layer
+
+## When to Use a Domain Service
+
+Use a domain service when:
+- Operation spans multiple aggregates
+- Logic doesn't naturally belong to any one entity
+- Requires domain knowledge but is conceptually a standalone operation
+- Represents a domain process or transformation
+
+## Operations
+
+### [Operation Name]
+```
+method(param1: Type, param2: Type): Result<ReturnType, Error>
+```
+
+**Intent**: [What business operation this represents]
+
+**Domain Logic**: [What domain rules or calculations are applied]
+
+**Parameters**:
+- `param1`: [Purpose and constraints]
+- `param2`: [Purpose and constraints]
+
+**Returns**: [What is returned and what it means]
+
+**Preconditions**:
+- [What must be true before calling]
+
+**Postconditions**:
+- [What's guaranteed after successful execution]
+
+**Business Rules Applied**:
+1. [Rule 1]
+2. [Rule 2]
+
+**Domain Events** (if any):
+- [EventName]: [When and why published]
+
+**Invariants Enforced**:
+- [Which aggregate or cross-aggregate invariants]
+
+**Example**:
+```
+Given: [Input state]
+When: service.method(arg1, arg2)
+Then: [Output state or result]
+```
+
+[Repeat for all operations]
+
+## Dependencies
+
+### Domain Layer Dependencies (OK)
+- **Aggregates**: [[AggregateA], [AggregateB]]
+- **Entities**: [[Entity1], [Entity2]]
+- **Value Objects**: [[VO1], [VO2]]
+- **Other Domain Services**: [[Service1]]
+- **Domain Events**: [[Event1], [Event2]]
+
+### NO Infrastructure Dependencies
+- ❌ No repositories directly
+- ❌ No databases or external APIs
+- ❌ No frameworks (except domain-focused libraries)
+
+**Note**: If infrastructure is needed, inject via **application service** or use **ports (interfaces)** in domain, implemented in infrastructure layer.
+
+## Collaborations
+
+### With Aggregates
+- **[Aggregate A]**: [How they interact - service calls aggregate methods]
+- **[Aggregate B]**: [How they interact]
+
+### With Other Domain Services
+- **[Service A]**: [How they collaborate]
+
+### With Policies (Reactive Logic)
+- **[Policy A]**: [Domain service may be invoked by policy in response to event]
+
+## Domain Logic Examples
+
+### Example 1: [Scenario]
+```
+// Example code showing domain logic
+const result = transferService.transfer(fromAccount, toAccount, amount);
+
+// Domain rules:
+// - fromAccount must have sufficient balance
+// - amount must be positive
+// - currency must match or be convertible
+// - transfer creates MoneyTransferred event
+```
+
+### Example 2: [Scenario]
+```
+// Another example
+```
+
+## Comparison with Application Service
+
+| Aspect | Domain Service | Application Service |
+|--------|----------------|---------------------|
+| **Concern** | Domain logic | Orchestration |
+| **Stateless** | Yes | Yes |
+| **Dependencies** | Domain objects only | Domain + Infrastructure |
+| **Transaction** | No | Yes (manages) |
+| **Events** | May publish | Commits events to store |
+| **Layer** | Domain | Application |
+
+## Testing Strategy
+
+- **Unit Tests**: Domain logic in isolation with mock/stub aggregates
+- **Property-Based Tests**: Domain rules hold for random inputs
+- **Example-Based Tests**: Known scenarios with expected outcomes
+
+## Design Decisions
+
+**Why Not in Entity/Aggregate?**
+[Justification for why this logic is a separate service]
+
+**Why Not Application Service?**
+[This is pure domain logic, not orchestration]
+
+**Alternatives Considered**:
+- [Alternative 1 and why it was rejected]
+- [Alternative 2 and why it was rejected]
+
+## References
+
+- [Link to aggregates used]
+- [Link to bounded context]
+- [Link to domain events]
+
+---
+
+# ============================================================
+# FILE: application-service-template.md
+# ============================================================
+---
+title: "Application Service: [Service Name]"
+context: "[Bounded Context Name]"
+version: "1.0.0"
+type: "application-service"
+---
+
+# Application Service: [Service Name]
+
+## Purpose
+
+[What workflow or use case this service orchestrates]
+
+## Characteristics
+
+- **Stateless**: Yes (no instance state between calls)
+- **Thin Layer**: Delegates to domain model
+- **Orchestration**: Coordinates aggregates, domain services, infrastructure
+- **Transaction Boundary**: Manages transactions
+- **Layer**: Application Layer
+
+## Responsibilities
+
+- ✅ Coordinate workflow across aggregates/services
+- ✅ Manage transactions
+- ✅ Publish domain events to message broker
+- ✅ Handle infrastructure concerns (via injected dependencies)
+- ✅ Translate DTOs ↔ domain objects
+- ❌ NO business logic (delegate to domain)
+
+## Operations
+
+### [Operation Name]
+```
+method(command: CommandDTO): Result<ResponseDTO, Error>
+```
+
+**Use Case**: [High-level user or system goal]
+
+**Input**: [Command object or DTO]
+```json
+{
+  "field1": "value",
+  "field2": 42
+}
+```
+
+**Output**: [Result DTO or acknowledgment]
+```json
+{
+  "id": "uuid",
+  "status": "success",
+  "message": "..."
+}
+```
+
+**Workflow Steps**:
+1. **Validate Input**: [Check command structure and permissions]
+2. **Load Aggregates**: [Retrieve from repositories]
+3. **Execute Domain Logic**: [Call aggregate methods or domain services]
+4. **Persist Changes**: [Save updated aggregates]
+5. **Publish Events**: [Emit domain events to message broker]
+6. **Return Result**: [Build response DTO]
+
+**Transaction Scope**: [What's included in the transaction]
+
+**Error Handling**:
+- [Error Type 1]: [How handled]
+- [Error Type 2]: [How handled]
+
+**Retry Strategy**: [Idempotent? Retry policy?]
+
+**Idempotency**: [How duplicate commands are handled]
+
+**Authorization**: [Who can execute this operation]
+
+**Example**:
+```typescript
+// Pseudocode
+async placeOrder(command: PlaceOrderCommand): Promise<OrderId> {
+  // 1. Validate
+  validateCommand(command);
+  checkAuthorization(command.userId);
+  
+  // 2. Load aggregates
+  const cart = await cartRepo.findById(command.cartId);
+  const customer = await customerRepo.findById(command.userId);
+  
+  // 3. Domain logic
+  const order = orderFactory.createFromCart(cart, customer);
+  order.place(); // Emits OrderPlaced event
+  
+  // 4. Persist
+  await orderRepo.save(order);
+  
+  // 5. Publish events
+  await eventBus.publish(order.domainEvents);
+  
+  // 6. Return
+  return order.id;
+}
+```
+
+[Repeat for all operations]
+
+## Dependencies
+
+### Domain Layer
+- **Aggregates**: [[Aggregate1], [Aggregate2]]
+- **Domain Services**: [[DomainService1]]
+- **Factories**: [[Factory1]]
+
+### Infrastructure Layer (Injected via DI)
+- **Repositories**: [[Repository1], [Repository2]]
+- **Event Bus**: [Message broker abstraction]
+- **External Services**: [[PaymentGateway], [EmailService]] (via ports)
+
+### Application Layer
+- **Commands**: [[Command1], [Command2]]
+- **DTOs**: [[DTO1], [DTO2]]
+- **Mappers**: [[Mapper1]]
+
+## Transactional Consistency
+
+**Transaction Boundaries**:
+- [Description of what's in a single transaction]
+- Example: Single order + all order lines saved atomically
+
+**Event Publishing**:
+- **Pattern**: Transactional Outbox | Event Sourcing | Dual Write (not recommended)
+- **Timing**: After successful transaction commit
+- **Idempotency**: Events include messageId for deduplication
+
+## Event Handling
+
+### Events Published (Produced)
+- **[EventName]**: [When and why]
+
+### Events Consumed (Reacted to)
+If this service also acts as an event handler:
+- **[EventName]**: [How it reacts]
+
+## Cross-Aggregate Coordination
+
+**Saga/Process Manager** (if applicable):
+[Link to saga-[name].md if this service participates in a long-running workflow]
+
+**Eventual Consistency**:
+[How eventual consistency is managed across aggregates]
+
+## Security & Authorization
+
+**Authentication**: [Required? How validated?]
+
+**Authorization**: [Role-based? Claims-based? Policy?]
+
+**Audit Logging**: [What's logged: user, action, timestamp, outcome]
+
+## Error Scenarios
+
+| Error | Cause | Handling | User Message |
+|-------|-------|----------|--------------|
+| [Error1] | [Cause] | [Retry/Fail/Compensate] | [User-friendly message] |
+| [Error2] | [Cause] | [Retry/Fail/Compensate] | [User-friendly message] |
+
+## Testing Strategy
+
+- **Unit Tests**: Mock repositories and dependencies; test workflow logic
+- **Integration Tests**: Real repositories, in-memory database; test full workflow
+- **Contract Tests**: Verify published events match consumer expectations
+
+## Design Decisions
+
+**Transaction Scope Rationale**:
+[Why this transaction boundary was chosen]
+
+**Async vs Sync**:
+[Why operations are synchronous or asynchronous]
+
+## Example Usage
+
+### From API Controller
+```typescript
+// REST Controller
+@Post('/orders')
+async placeOrder(@Body() dto: PlaceOrderDto) {
+  const command = mapDtoToCommand(dto);
+  const orderId = await orderApplicationService.placeOrder(command);
+  return { orderId };
+}
+```
+
+### From Message Handler
+```typescript
+// Event Handler
+@OnEvent('CartCheckoutRequested')
+async handleCartCheckout(event: CartCheckoutRequestedEvent) {
+  const command = new PlaceOrderCommand(event.cartId, event.userId);
+  await orderApplicationService.placeOrder(command);
+}
+```
+
+## References
+
+- [Link to aggregates]
+- [Link to domain services]
+- [Link to repositories]
+- [Link to commands]
+- [Link to domain events]
+
+---
+
+# ============================================================
+# FILE: repository-template.md
+# ============================================================
+---
+title: "Repository: [Repository Name]"
+context: "[Bounded Context Name]"
+aggregate: "[Aggregate Root Name]"
+version: "1.0.0"
+---
+
+# Repository: [Repository Name]
+
+## Purpose
+
+[Abstract persistence for [Aggregate] - provides collection-like interface]
+
+## Aggregate Root
+
+**Manages**: [Aggregate Root Entity Name]
+
+**Scope**: This repository persists and retrieves entire aggregate (root + all child entities/value objects)
+
+## Interface (Port)
+
+Define as interface in **domain layer**; implement in **infrastructure layer**.
+
+```typescript
+interface [RepositoryName] {
+  // Required methods
+  findById(id: AggregateId): Promise<Aggregate | null>;
+  save(aggregate: Aggregate): Promise<void>;
+  delete(id: AggregateId): Promise<void>;
+  
+  // Optional query methods
+  findByX(x: Type): Promise<Aggregate[]>;
+  existsById(id: AggregateId): Promise<boolean>;
+  count(): Promise<number>;
+}
+```
+
+## Methods
+
+### findById
+```
+findById(id: AggregateId): Promise<Aggregate | null>
+```
+- **Purpose**: Retrieve aggregate by unique identifier
+- **Returns**: Full aggregate instance or null if not found
+- **Includes**: All child entities and value objects
+- **Caching**: [Strategy, if applicable]
+
+### save
+```
+save(aggregate: Aggregate): Promise<void>
+```
+- **Purpose**: Persist aggregate state
+- **Behavior**: Upsert (insert if new, update if exists)
+- **Atomicity**: All aggregate parts saved in single transaction
+- **Versioning**: [Optimistic locking? Version field?]
+- **Events**: Does NOT publish events (application service does)
+
+### delete
+```
+delete(id: AggregateId): Promise<void>
+```
+- **Purpose**: Remove aggregate from persistence
+- **Type**: Hard delete | Soft delete (set deleted flag)
+- **Cascades**: [Child entities deleted automatically]
+
+### Custom Query Methods
+
+#### [findByCustomCriteria]
+```
+findByX(x: Type): Promise<Aggregate[]>
+```
+- **Purpose**: [Why this query is needed]
+- **Performance**: [Indexed? Pagination?]
+- **Returns**: Collection of aggregates
+
+**⚠️ Repository Anti-Patterns to Avoid**:
+- ❌ Don't return partial aggregates (always full aggregate or nothing)
+- ❌ Don't have methods that update single properties (use save with full aggregate)
+- ❌ Don't put business logic in repository (keep it pure persistence)
+
+## Persistence Mapping
+
+### Technology
+- **Database**: [PostgreSQL, MongoDB, DynamoDB, etc.]
+- **ORM/ODM**: [Prisma, TypeORM, Mongoose, etc.]
+
+### Schema
+
+#### Main Table/Collection: `[table_name]`
+| Column | Type | Constraints | Notes |
+|--------|------|-------------|-------|
+| id | UUID | PK | Aggregate ID |
+| [field1] | [type] | [NOT NULL, etc.] | [Notes] |
+| version | INT | NOT NULL | Optimistic locking |
+| created_at | TIMESTAMP | NOT NULL | Audit |
+| updated_at | TIMESTAMP | NOT NULL | Audit |
+
+#### Related Tables (if applicable)
+- **[child_table]**: [Description of relationship]
+
+### Mapping Strategy
+- **Aggregate Root**: → Main table
+- **Child Entities**: → Related tables with FK to root OR embedded JSON
+- **Value Objects**: → Embedded columns OR JSON field
+- **Collections**: → Separate table with FK OR JSON array
+
+## Transactional Consistency
+
+**Transaction Scope**: Entire aggregate
+
+**Concurrency Control**:
+- **Optimistic Locking**: Use version field
+- **Conflict Resolution**: [Strategy when version mismatch occurs]
+
+**Isolation Level**: [READ_COMMITTED, REPEATABLE_READ, etc.]
+
+## Caching Strategy
+
+**Cache**: Yes | No
+
+**If Yes**:
+- **Technology**: [Redis, in-memory, etc.]
+- **TTL**: [Duration]
+- **Invalidation**: [On save/delete]
+- **Cache Key**: [Strategy, e.g., "aggregate:{id}"]
+
+## Performance Considerations
+
+### Lazy Loading
+[Which associations are lazy-loaded vs eager-loaded]
+
+### Indexing
+- Index on: [field1, field2, etc.]
+- Rationale: [Why these indexes]
+
+### Pagination
+[Support for paginated queries? Cursor-based or offset-based?]
+
+### N+1 Query Prevention
+[Strategy to avoid N+1 problems]
+
+## Implementation Example
+
+```typescript
+// Infrastructure layer implementation
+class PostgresOrderRepository implements OrderRepository {
+  constructor(private db: Database) {}
+  
+  async findById(id: OrderId): Promise<Order | null> {
+    const row = await this.db.query(
+      'SELECT * FROM orders WHERE id = $1',
+      [id.value]
+    );
+    if (!row) return null;
+    return this.mapToAggregate(row);
+  }
+  
+  async save(order: Order): Promise<void> {
+    const data = this.mapToData(order);
+    await this.db.query(
+      'INSERT INTO orders (...) VALUES (...) ON CONFLICT (id) DO UPDATE SET ...',
+      [...data]
+    );
+  }
+  
+  async delete(id: OrderId): Promise<void> {
+    await this.db.query('DELETE FROM orders WHERE id = $1', [id.value]);
+  }
+  
+  private mapToAggregate(row: any): Order {
+    // Map database row to domain aggregate
+  }
+  
+  private mapToData(order: Order): any {
+    // Map domain aggregate to database row
+  }
+}
+```
+
+## Testing Strategy
+
+### Unit Tests (with Mock Repository)
+- Test domain logic without real database
+- Mock repository returns test aggregates
+
+### Integration Tests (with Real Database)
+- Test actual persistence and retrieval
+- Verify mapping correctness
+- Test concurrency scenarios (optimistic locking)
+
+### Test Data Builder
+```typescript
+// Helper for tests
+class OrderTestBuilder {
+  build(): Order {
+    return Order.create(...);
+  }
+}
+```
+
+## Design Decisions
+
+**Why This Repository Abstraction?**
+- Decouples domain from persistence technology
+- Allows swapping database implementations
+- Simplifies testing (mock repositories)
+
+**ORM vs Raw SQL?**
+[Rationale for choice]
+
+## References
+
+- [Link to aggregate]
+- [Link to bounded context]
+- [Database schema documentation]
+
+---
+
+# ============================================================
+# FILE: factory-template.md
+# ============================================================
+---
+title: "Factory: [Factory Name]"
+context: "[Bounded Context Name]"
+creates: "[Aggregate or Entity Name]"
+version: "1.0.0"
+---
+
+# Factory: [Factory Name]
+
+## Purpose
+
+[Why a factory is needed - complexity of creating valid aggregate/entity instances]
+
+## Creates
+
+**Target**: [Aggregate Root or Entity Name]
+
+**Complexity**: [Why simple constructor is insufficient]
+
+## Factory Methods
+
+### [create]
+```
+create(param1: Type, param2: Type): Result<Aggregate, Error>
+```
+
+**Intent**: [What scenario this factory method serves]
+
+**Parameters**:
+- `param1`: [Purpose]
+- `param2`: [Purpose]
+
+**Construction Rules**:
+1. [Rule 1: e.g., "must have at least one line item"]
+2. [Rule 2: e.g., "default status is PENDING"]
+3. [Rule 3: e.g., "calculate totals from line items"]
+
+**Validation**:
+- [Validation 1]
+- [Validation 2]
+
+**Returns**: [Valid aggregate instance or error]
+
+**Example**:
+```typescript
+const order = OrderFactory.create(customerId, lineItems);
+// Returns: Order with ID, initial status, calculated totals
+```
+
+### [createFrom]
+```
+createFrom(source: SourceType): Result<Aggregate, Error>
+```
+
+**Intent**: [E.g., create Order from Cart]
+
+**Transformation Rules**:
+- [How source is transformed to target]
+
+**Example**:
+```typescript
+const order = OrderFactory.createFromCart(cart);
+// Converts cart items to order lines, copies customer info, etc.
+```
+
+[Repeat for all factory methods]
+
+## Construction Complexity
+
+**Why Not Simple Constructor?**
+- [Reason 1: e.g., "Requires complex validation"]
+- [Reason 2: e.g., "Needs to fetch related data"]
+- [Reason 3: e.g., "Multiple creation scenarios with different rules"]
+
+**Encapsulated Logic**:
+- [What logic is hidden in the factory]
+
+## Dependencies
+
+### Domain Layer
+- **Value Objects**: [Which value objects are created as part of aggregate]
+- **Domain Services**: [If domain logic is needed during creation]
+
+### Infrastructure (via DI, if needed)
+- **Repositories**: [If factory needs to check uniqueness or fetch related data]
+- **ID Generation**: [UUID generator, sequence, etc.]
+
+**⚠️ Keep Factories Pure When Possible**:
+- Prefer factories that don't depend on infrastructure
+- If infrastructure is needed, inject via interface (port)
+
+## Validation at Creation
+
+All factories must ensure created aggregates are **valid from the start**.
+
+**Validation Checks**:
+1. [Check 1]
+2. [Check 2]
+
+**Invalid Input → Error**:
+```typescript
+OrderFactory.create(customerId, []); // Empty line items
+// Returns: Error("Order must have at least one line item")
+```
+
+## Initial State
+
+**Default Values**:
+- [Field 1]: [Default value and why]
+- [Field 2]: [Default value and why]
+
+**Calculated Values**:
+- [Field 3]: [How calculated from inputs]
+
+**Generated Values**:
+- [Field 4]: [E.g., UUID, timestamp]
+
+## Domain Events
+
+**Events Published During Creation** (if any):
+- **[EventName]**: [E.g., OrderCreated]
+
+**Timing**: [When event is added to aggregate's uncommitted events]
+
+## Examples
+
+### Example 1: Standard Creation
+```typescript
+const order = OrderFactory.create({
+  customerId: CustomerId.create("123"),
+  lineItems: [
+    { productId: "p1", quantity: 2, price: Money.create(10, "USD") },
+    { productId: "p2", quantity: 1, price: Money.create(20, "USD") }
+  ],
+  shippingAddress: Address.create(...)
+});
+
+// Result:
+// - Order ID: generated UUID
+// - Status: PENDING
+// - Total: $40.00
+// - Created timestamp: now
+// - Events: [OrderCreated]
+```
+
+### Example 2: Creation from Another Aggregate
+```typescript
+const order = OrderFactory.createFromCart(cart, shippingAddress);
+
+// Transformation:
+// - Cart items → Order lines
+// - Cart customer → Order customer
+// - Cart totals → Order totals
+// - Cart cleared after order created
+```
+
+## Testing Strategy
+
+- **Unit Tests**: Valid and invalid inputs
+- **Property-Based Tests**: All created instances are valid
+- **Example-Based Tests**: Known scenarios
+
+## Design Decisions
+
+**Why Factory (Not Static Constructor)?**
+[Justification for using factory pattern]
+
+**Alternative Approaches Considered**:
+- [Alternative 1 and why rejected]
+- [Alternative 2 and why rejected]
+
+## References
+
+- [Link to aggregate/entity]
+- [Link to value objects]
+- [Link to domain events]
+
+---
+
+# ============================================================
+# FILE: domain-event-template.md
+# ============================================================
+---
+title: "Domain Event: [EventName]"
+context: "[Bounded Context Name]"
+aggregate: "[Source Aggregate]"
+version: "1.0.0"
+---
+
+# Domain Event: [EventName]
+
+## Definition
+
+[What happened - described as a past-tense fact]
+
+## Event Type
+
+**Category**: [Business Event | System Event | Integration Event]
+
+**Scope**: [Within Context | Cross-Context]
+
+## Source
+
+**Aggregate**: [Which aggregate publishes this event]
+
+**Triggered By**: [Command or action that causes this event]
+
+**Timing**: [Immediately after state change | Async after transaction commit]
+
+## Intent
+
+[Why this event matters - what business fact it represents]
+
+## Payload Schema
+
+### Version 1.0
+```json
+{
+  "eventId": "uuid",
+  "eventType": "[EventName]",
+  "aggregateId": "uuid",
+  "aggregateType": "[AggregateName]",
+  "aggregateVersion": 1,
+  "occurredAt": "2025-01-15T10:30:00Z",
+  "data": {
+    "field1": "value",
+    "field2": 42,
+    "nestedObject": {
+      "field3": "value"
+    }
+  },
+  "metadata": {
+    "correlationId": "uuid",
+    "causationId": "uuid",
+    "userId": "uuid",
+    "tenantId": "uuid"
+  }
+}
+```
+
+### Data Fields
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| field1 | string | Yes | [Purpose] |
+| field2 | integer | Yes | [Purpose] |
+| nestedObject | object | No | [Purpose] |
+
+## Metadata
+
+**Correlation ID**: [Tracks related events across workflow]
+
+**Causation ID**: [ID of event/command that caused this event]
+
+**User ID**: [Who initiated the action]
+
+**Tenant ID**: [Multi-tenancy support, if applicable]
+
+## Consumers
+
+### Within Bounded Context
+- **[Policy 1]**: [How it reacts]
+- **[Saga 1]**: [How it participates in workflow]
+
+### Cross-Context
+- **[Other Context 1]**: [How it consumes this event]
+- **[Other Context 2]**: [How it consumes this event]
+
+## Guarantees
+
+**Delivery**: At-least-once | Exactly-once | At-most-once
+
+**Ordering**: [Per aggregate | Global | None]
+
+**Idempotency**: [How consumers handle duplicates]
+
+**Retry**: [Retry policy if consumer fails]
+
+## Versioning
+
+**Current Version**: 1.0
+
+**Breaking Changes**: [List any breaking changes from previous versions]
+
+**Schema Evolution Strategy**:
+- **Backward Compatible**: Add optional fields
+- **Breaking Change**: Create new event type or new version
+
+**Deprecation Policy**: [How old versions are phased out]
+
+## Publishing
+
+**Technology**: [Kafka, RabbitMQ, EventBridge, etc.]
+
+**Topic/Queue**: `[topic-name]`
+
+**Partitioning**: [Partition by aggregateId for ordering]
+
+**Serialization**: JSON | Avro | Protobuf
+
+## Example
+
+### Scenario: [Description]
+```json
+{
+  "eventId": "550e8400-e29b-41d4-a716-446655440000",
+  "eventType": "OrderPlaced",
+  "aggregateId": "order-12345",
+  "aggregateType": "Order",
+  "aggregateVersion": 1,
+  "occurredAt": "2025-01-15T10:30:00Z",
+  "data": {
+    "customerId": "cust-789",
+    "orderTotal": {
+      "amount": 150.00,
+      "currency": "USD"
+    },
+    "lineItems": [
+      {
+        "productId": "prod-1",
+        "quantity": 2,
+        "price": { "amount": 50.00, "currency": "USD" }
+      },
+      {
+        "productId": "prod-2",
+        "quantity": 1,
+        "price": { "amount": 50.00, "currency": "USD" }
+      }
+    ],
+    "shippingAddress": {
+      "street": "123 Main St",
+      "city": "Springfield",
+      "state": "IL",
+      "zipCode": "62701"
+    }
+  },
+  "metadata": {
+    "correlationId": "checkout-session-abc",
+    "causationId": "command-place-order-xyz",
+    "userId": "user-456",
+    "tenantId": "tenant-1"
+  }
+}
+```
+
+## Handler Examples
+
+### Policy (Synchronous Reaction)
+```typescript
+// Within same context
+@OnEvent('OrderPlaced')
+class SendOrderConfirmationPolicy {
+  handle(event: OrderPlacedEvent): void {
+    // Synchronous side effect
+    emailService.sendOrderConfirmation(event.data.customerId, event.aggregateId);
+  }
+}
+```
+
+### Saga Step (Workflow Coordination)
+```typescript
+// Cross-context coordination
+@OnEvent('OrderPlaced')
+class CheckoutSaga {
+  handle(event: OrderPlacedEvent): void {
+    // Next step in workflow
+    this.sendCommand('ReserveInventory', {
+      orderId: event.aggregateId,
+      lineItems: event.data.lineItems
+    });
+  }
+}
+```
+
+### External Consumer (Another Context)
+```typescript
+// In Inventory context
+@OnEvent('OrderPlaced')
+class InventoryReservationHandler {
+  async handle(event: OrderPlacedEvent): Promise<void> {
+    // Idempotency check
+    if (await this.alreadyProcessed(event.eventId)) return;
+    
+    // Reserve inventory
+    for (const item of event.data.lineItems) {
+      await this.inventoryService.reserve(item.productId, item.quantity);
+    }
+    
+    // Mark as processed
+    await this.markProcessed(event.eventId);
+  }
+}
+```
+
+## Testing
+
+### Unit Tests
+- Schema validation
+- Serialization/deserialization
+- Field constraints
+
+### Integration Tests
+- Publishing to message broker
+- Consumer receives event
+- Idempotency handling
+
+### Contract Tests
+- Verify consumers can parse schema
+- Detect breaking changes
+
+## Design Decisions
+
+**Why This Event?**
+[Justification for event existence and granularity]
+
+**Data Included vs. Referenced**:
+- **Included**: [Which data is in payload]
+- **Referenced**: [Which data consumers must fetch separately]
+
+**Rationale**: [Why these choices - balance between completeness and size]
+
+## References
+
+- [Link to aggregate that publishes this]
+- [Link to commands that trigger this]
+- [Link to policies that react to this]
+- [Link to sagas that coordinate on this]
+
+---
+
+# ============================================================
+# FILE: command-template.md
+# ============================================================
+---
+title: "Command: [CommandName]"
+context: "[Bounded Context Name]"
+aggregate: "[Target Aggregate]"
+version: "1.0.0"
+---
+
+# Command: [CommandName]
+
+## Definition
+
+[What the user/system intends to do - imperative statement]
+
+## Intent
+
+[Why this command exists - what business goal it serves]
+
+## Target
+
+**Aggregate**: [Which aggregate handles this command]
+
+**Handler**: [Application service or aggregate method]
+
+## Payload Schema
+
+```json
+{
+  "commandId": "uuid",
+  "commandType": "[CommandName]",
+  "aggregateId": "uuid",
+  "timestamp": "2025-01-15T10:30:00Z",
+  "data": {
+    "field1": "value",
+    "field2": 42
+  },
+  "metadata": {
+    "correlationId": "uuid",
+    "causationId": "uuid",
+    "userId": "uuid",
+    "tenantId": "uuid"
+  }
+}
+```
+
+### Data Fields
+
+| Field | Type | Required | Validation |
+|-------|------|----------|------------|
+| field1 | string | Yes | [Rules] |
+| field2 | integer | Yes | [Range, constraints] |
+
+## Validation
+
+### Syntactic Validation (Structure)
+- [Rule 1: e.g., "field1 must not be empty"]
+- [Rule 2: e.g., "field2 must be positive"]
+
+### Semantic Validation (Business Rules)
+- [Rule 1: e.g., "aggregate must be in PENDING state"]
+- [Rule 2: e.g., "user must have permission"]
+
+## Preconditions
+
+**Aggregate State**:
+- [What state aggregate must be in]
+
+**Permissions**:
+- [Who can execute this command]
+
+**External Constraints**:
+- [Any dependencies on other systems/data]
+
+## Execution Flow
+
+1. **Receive Command**: [From API, message queue, etc.]
+2. **Validate**: [Check structure and business rules]
+3. **Load Aggregate**: [From repository]
+4. **Execute**: [Call aggregate method]
+5. **Persist**: [Save updated aggregate]
+6. **Publish Events**: [Emit resulting domain events]
+7. **Return**: [Success/failure response]
+
+## Outcomes
+
+### Success
+- **Events Published**: [[EventName1], [EventName2]]
+- **State Change**: [How aggregate state changes]
+- **Response**: [What's returned to caller]
+
+### Failure Scenarios
+
+| Scenario | Reason | Error Code | User Message |
+|----------|--------|------------|--------------|
+| [Scenario 1] | [Why] | [CODE] | [User-friendly message] |
+| [Scenario 2] | [Why] | [CODE] | [User-friendly message] |
+
+## Idempotency
+
+**Strategy**: [How duplicate commands are handled]
+
+**Idempotency Key**: [commandId | custom key]
+
+**Duplicate Detection**: [How system knows command was already processed]
+
+**Result**: [Duplicate commands return same result without re-executing]
+
+## Authorization
+
+**Required Role**: [User role or permission needed]
+
+**Resource Ownership**: [Must user own the aggregate?]
+
+**Policy**: [Policy-based authorization if applicable]
+
+## Example
+
+### Scenario: [Description]
+
+**Command**:
+```json
+{
+  "commandId": "cmd-12345",
+  "commandType": "PlaceOrder",
+  "aggregateId": "order-67890",
+  "timestamp": "2025-01-15T10:30:00Z",
+  "data": {
+    "customerId": "cust-111",
+    "lineItems": [
+      { "productId": "prod-1", "quantity": 2 },
+      { "productId": "prod-2", "quantity": 1 }
+    ],
+    "shippingAddress": {
+      "street": "123 Main St",
+      "city": "Springfield",
+      "state": "IL",
+      "zipCode": "62701"
+    }
+  },
+  "metadata": {
+    "correlationId": "session-abc",
+    "causationId": "cart-checkout-xyz",
+    "userId": "user-456",
+    "tenantId": "tenant-1"
+  }
+}
+```
+
+**Result**:
+```json
+{
+  "success": true,
+  "orderId": "order-67890",
+  "events": ["OrderPlaced"]
+}
+```
+
+## Handler Implementation (Pseudocode)
+
+```typescript
+class PlaceOrderHandler {
+  async handle(command: PlaceOrderCommand): Promise<OrderId> {
+    // 1. Validate
+    this.validate(command);
+    
+    // 2. Load aggregate (or create new)
+    const order = await this.orderFactory.create(
+      command.data.customerId,
+      command.data.lineItems,
+      command.data.shippingAddress
+    );
+    
+    // 3. Execute domain logic
+    order.place(); // Emits OrderPlaced event
+    
+    // 4. Persist
+    await this.orderRepo.save(order);
+    
+    // 5. Publish events
+    await this.eventBus.publish(order.domainEvents);
+    
+    // 6. Return result
+    return order.id;
+  }
+}
+```
+
+## Testing
+
+### Unit Tests
+- Validation logic
+- Success and failure paths
+- Idempotency
+
+### Integration Tests
+- Full command execution flow
+- Event publishing
+- Database persistence
+
+### Contract Tests
+- API clients can send valid commands
+- Command schema is backward compatible
+
+## Design Decisions
+
+**Why This Command?**
+[Justification for command existence and granularity]
+
+**Synchronous vs. Asynchronous**:
+- [Is command handled synchronously (API) or asynchronously (queue)?]
+- [Rationale]
+
+**Coarse-Grained vs. Fine-Grained**:
+- [Does command handle entire workflow or single step?]
+- [Rationale]
+
+## References
+
+- [Link to aggregate]
+- [Link to events published]
+- [Link to application service]
+- [Link to API endpoint documentation]
+
+---
+
+# ============================================================
+# FILE: policy-template.md
+# ============================================================
+---
+title: "Policy: [Policy Name]"
+context: "[Bounded Context Name]"
+type: "reactive-logic | business-rule"
+version: "1.0.0"
+---
+
+# Policy: [Policy Name]
+
+## Definition
+
+[Reactive business rule - "When X happens, then do Y"]
+
+## Characteristics
+
+- **Trigger**: Event-driven (reacts to domain events)
+- **Synchronous**: Usually executes within same transaction
+- **Deterministic**: Same input always produces same output
+- **Side-Effect Free Logic**: Decision logic is pure; actions may have side effects
+
+## Trigger
+
+**Event**: [EventName that triggers this policy]
+
+**Condition** (optional): [Additional condition to check before executing]
+
+## Action
+
+**Intent**: [What business operation is performed]
+
+**Result**: 
+- Issues **Command**: [CommandName]
+- OR Publishes **Event**: [EventName]
+- OR Invokes **Domain Service**: [ServiceName]
+
+## Business Rule
+
+**Rule Statement**: [Natural language statement of the business rule]
+
+**Example**: "When an order is placed, then reserve inventory for all line items"
+
+## Execution
+
+### Synchronous (Immediate)
+```
+Event: OrderPlaced
+Policy: ReserveInventoryPolicy
+  → Trigger: ReserveInventory command
+  → Timing: Same transaction or immediately after
+```
+
+### Asynchronous (Eventual)
+```
+Event: PaymentFailed
+Policy: NotifyCustomerPolicy
+  → Trigger: SendEmail command
+  → Timing: Queued for async processing
+```
+
+## Logic
+
+```typescript
+class [PolicyName] {
+  @OnEvent('[EventName]')
+  handle(event: [EventName]): void {
+    // 1. Check condition (if any)
+    if (!this.shouldExecute(event)) return;
+    
+    // 2. Make decision (pure logic)
+    const action = this.decide(event);
+    
+    // 3. Execute action (side effect)
+    this.execute(action);
+  }
+  
+  private shouldExecute(event: [EventName]): boolean {
+    // Optional condition logic
+    return true;
+  }
+  
+  private decide(event: [EventName]): Action {
+    // Business logic to determine what to do
+    return new ReserveInventoryCommand(...);
+  }
+  
+  private execute(action: Action): void {
+    // Send command, publish event, or call service
+    this.commandBus.send(action);
+  }
+}
+```
+
+## Dependencies
+
+- **Events**: [Which events this policy listens to]
+- **Commands**: [Which commands this policy issues]
+- **Domain Services**: [Which services this policy invokes]
+
+## Examples
+
+### Example 1: [Scenario]
+```
+Given: OrderPlaced event with 2 line items
+When: ReserveInventoryPolicy executes
+Then: ReserveInventory command issued for each product
+```
+
+### Example 2: [Scenario]
+```
+Given: PaymentAuthorized event for order-123
+When: ConfirmOrderPolicy executes
+Then: ConfirmOrder command issued
+```
+
+## Idempotency
+
+**Strategy**: [How duplicate events are handled]
+
+**Duplicate Detection**: [Event ID tracking]
+
+**Outcome**: [Policy executes once even if event delivered multiple times]
+
+## Error Handling
+
+| Error | Cause | Handling |
+|-------|-------|----------|
+| [Error 1] | [Cause] | [Retry | Log | Alert] |
+| [Error 2] | [Cause] | [Retry | Log | Alert] |
+
+## Testing
+
+### Unit Tests
+- Decision logic with various inputs
+- Condition evaluation
+- Command/event generation
+
+### Integration Tests
+- End-to-end: Event → Policy → Command → Outcome
+- Idempotency verification
+
+## Comparison: Policy vs. Saga
+
+| Aspect | Policy | Saga |
+|--------|--------|------|
+| **Trigger** | Single event | Multiple events |
+| **State** | Stateless | Stateful |
+| **Scope** | Reactive rule | Long-running workflow |
+| **Timing** | Immediate | Multi-step coordination |
+
+## Design Decisions
+
+**Why Policy (Not Saga)?**
+[This is a simple reaction, not a complex workflow]
+
+**Synchronous vs. Asynchronous?**
+[Rationale for timing choice]
+
+## References
+
+- [Link to trigger event]
+- [Link to issued commands]
+- [Link to bounded context]
+
+---
+
+# ============================================================
+# FILE: saga-template.md
+# ============================================================
+---
+title: "Saga: [Saga Name]"
+context: "[Bounded Context or Cross-Context]"
+type: "orchestration | choreography"
+version: "1.0.0"
+status: "draft | review | approved"
+---
+
+# Saga: [Saga Name]
+
+## Purpose
+
+[What long-running, cross-aggregate or cross-context workflow this saga coordinates]
+
+## Type
+
+**Pattern**: Orchestration | Choreography
+
+**Orchestration**: Central coordinator issues commands and listens for events
+**Choreography**: Decentralized; each service reacts to events and publishes new events
+
+## Trigger
+
+**Initiating Event**: [EventName that starts this saga]
+
+**Example**: CartCheckoutRequested
+
+## Workflow Steps
+
+### Step 1: [Step Name]
+- **Action**: Issue [CommandName] to [Context/Aggregate]
+- **Target**: [Context name]
+- **Success Event**: [EventName]
+- **Failure Event**: [EventName]
+- **Timeout**: [Duration]
+
+**On Success**: → Proceed to Step 2
+**On Failure**: → Execute Compensation for Step 1 → End with failure
+
+### Step 2: [Step Name]
+- **Action**: Issue [CommandName] to [Context/Aggregate]
+- **Target**: [Context name]
+- **Success Event**: [EventName]
+- **Failure Event**: [EventName]
+- **Timeout**: [Duration]
+
+**On Success**: → Proceed to Step 3
+**On Failure**: → Execute Compensations for Step 2, Step 1 → End with failure
+
+[Repeat for all steps]
+
+### Step N: [Final Step]
+- **Action**: Issue [CommandName]
+- **Success Event**: [EventName] (saga completes successfully)
+
+## State Machine
+
+```
+[STARTED]
+    |
+    v
+[STEP_1_IN_PROGRESS]
+    |-- Success --> [STEP_2_IN_PROGRESS]
+    |-- Failure --> [COMPENSATING_STEP_1]
+                        |
+                        v
+                   [FAILED]
+
+[STEP_2_IN_PROGRESS]
+    |-- Success --> [COMPLETED]
+    |-- Failure --> [COMPENSATING_STEP_2]
+                        |
+                        v
+                   [COMPENSATING_STEP_1]
+                        |
+                        v
+                   [FAILED]
+```
+
+## Saga State
+
+The saga maintains state to track progress:
+
+```json
+{
+  "sagaId": "uuid",
+  "sagaType": "[SagaName]",
+  "status": "IN_PROGRESS | COMPLETED | FAILED | COMPENSATING",
+  "currentStep": 2,
+  "completedSteps": [1],
+  "compensatedSteps": [],
+  "data": {
+    "orderId": "uuid",
+    "customerId": "uuid",
+    "reservationIds": ["uuid1", "uuid2"]
+  },
+  "createdAt": "ISO 8601",
+  "updatedAt": "ISO 8601"
+}
+```
+
+## Compensations (Rollback)
+
+### Compensation for Step 1
+- **Action**: Issue [CompensatingCommand]
+- **Intent**: Undo the effect of Step 1
+- **Example**: ReleaseInventory (to undo ReserveInventory)
+
+### Compensation for Step 2
+- **Action**: Issue [CompensatingCommand]
+- **Intent**: Undo the effect of Step 2
+- **Example**: RefundPayment (to undo AuthorizePayment)
+
+**Compensation Order**: Reverse order of execution (Step 2, then Step 1)
+
+## Timeouts
+
+**Step-Level Timeout**: [Duration per step, e.g., 30 seconds]
+
+**Saga-Level Timeout**: [Max duration for entire saga, e.g., 5 minutes]
+
+**Timeout Behavior**: 
+- Treat as failure
+- Execute compensations for completed steps
+- Publish SagaFailed event
+
+## Idempotency
+
+**Saga Instance**: Identified by sagaId; ensures single execution
+
+**Command Idempotency**: All commands issued by saga are idempotent
+
+**Event Handling**: Saga state prevents duplicate event processing
+
+## Example: Checkout Saga
+
+### Trigger
+- **Event**: CartCheckoutRequested
+- **Data**: cartId, customerId
+
+### Steps
+
+#### Step 1: Reserve Inventory
+- **Command**: ReserveInventory(orderId, lineItems) → Inventory Context
+- **Success**: InventoryReserved event
+- **Failure**: InventoryNotAvailable event
+- **Compensation**: ReleaseInventory(orderId, lineItems)
+
+#### Step 2: Authorize Payment
+- **Command**: AuthorizePayment(orderId, amount) → Payment Context
+- **Success**: PaymentAuthorized event
+- **Failure**: PaymentFailed event
+- **Compensation**: RefundPayment(orderId, transactionId)
+
+#### Step 3: Confirm Order
+- **Command**: ConfirmOrder(orderId) → Order Context
+- **Success**: OrderConfirmed event
+- **Compensation**: CancelOrder(orderId)
+
+### Success Path
+```
+CartCheckoutRequested
+ → ReserveInventory → InventoryReserved
+ → AuthorizePayment → PaymentAuthorized
+ → ConfirmOrder → OrderConfirmed
+ → CheckoutCompleted (saga done)
+```
+
+### Failure Path (Payment Fails)
+```
+CartCheckoutRequested
+ → ReserveInventory → InventoryReserved
+ → AuthorizePayment → PaymentFailed
+ → Compensate: ReleaseInventory
+ → CheckoutFailed (saga failed)
+```
+
+## Implementation
+
+### Orchestration Style (Recommended for Complex Workflows)
+```typescript
+class CheckoutSaga {
+  private state: SagaState;
+  
+  @OnEvent('CartCheckoutRequested')
+  async start(event: CartCheckoutRequestedEvent) {
+    this.state = this.initializeSaga(event);
+    await this.executeStep1();
+  }
+  
+  private async executeStep1() {
+    await this.commandBus.send(new ReserveInventoryCommand(...));
+    this.state.currentStep = 1;
+    await this.saveSagaState();
+  }
+  
+  @OnEvent('InventoryReserved')
+  async onInventoryReserved(event: InventoryReservedEvent) {
+    if (this.state.currentStep !== 1) return;
+    this.state.completedSteps.push(1);
+    await this.executeStep2();
+  }
+  
+  @OnEvent('InventoryNotAvailable')
+  async onInventoryFailed(event: InventoryNotAvailableEvent) {
+    await this.fail("Inventory not available");
+  }
+  
+  // ... more event handlers and steps
+  
+  private async compensateStep1() {
+    await this.commandBus.send(new ReleaseInventoryCommand(...));
+  }
+}
+```
+
+### Choreography Style (For Simple Workflows)
+```
+// No central saga; each service reacts independently
+
+// Order Context
+@OnEvent('CartCheckoutRequested')
+async createOrder(event) {
+  const order = Order.create(...);
+  await orderRepo.save(order);
+  await eventBus.publish(new OrderCreated(order.id));
+}
+
+// Inventory Context
+@OnEvent('OrderCreated')
+async reserveInventory(event) {
+  // Reserve inventory
+  await eventBus.publish(new InventoryReserved(event.orderId));
+}
+
+// Payment Context
+@OnEvent('InventoryReserved')
+async authorizePayment(event) {
+  // Authorize payment
+  await eventBus.publish(new PaymentAuthorized(event.orderId));
+}
+```
+
+## Persistence
+
+**Saga State Storage**: [Database table or event store]
+
+**State Recovery**: [How saga resumes after crash]
+
+**Event Replay**: [Can saga replay events to recover state?]
+
+## Monitoring & Observability
+
+**Metrics**:
+- Saga duration (p50, p95, p99)
+- Success rate
+- Failure rate per step
+- Compensation frequency
+
+**Logging**:
+- Log each step transition
+- Log compensations
+- Log timeouts
+
+**Alerts**:
+- High failure rate
+- Timeouts exceeding threshold
+- Sagas stuck in IN_PROGRESS
+
+## Testing
+
+### Unit Tests
+- State transitions
+- Compensation logic
+- Timeout handling
+
+### Integration Tests
+- End-to-end happy path
+- Each failure scenario
+- Timeout scenarios
+- Idempotency
+
+### Chaos Testing
+- Random failures at each step
+- Network delays
+- Service unavailability
+
+## Design Decisions
+
+**Why Saga (Not Single Transaction)?**
+[Justification: cross-context, long-running, eventual consistency]
+
+**Orchestration vs. Choreography?**
+[Rationale for chosen pattern]
+
+**Compensation Strategy?**
+[Why compensations are designed this way]
+
+## References
+
+- [Link to commands]
+- [Link to events]
+- [Link to bounded contexts involved]
+- [Link to context map]
+
+---
+
+# ============================================================
+# FILE: api-contract-template.md
+# ============================================================
+---
+title: "API Contract: [Context Name] API"
+context: "[Bounded Context Name]"
+style: "REST | gRPC | GraphQL | Event-Driven"
+version: "1.0.0"
+status: "draft | review | approved"
+---
+
+# API Contract: [Context Name] API
+
+## Overview
+
+[High-level description of what this API provides]
+
+## API Style
+
+**Type**: REST | gRPC | GraphQL | Event-Driven (AsyncAPI)
+
+**Base URL**: `https://api.example.com/[context]`
+
+**Protocol**: HTTP/1.1 | HTTP/2 | HTTPS
+
+## Authentication
+
+**Method**: API Key | OAuth 2.0 | JWT | mTLS | None
+
+**Header**: `Authorization: Bearer <token>`
+
+**Scopes** (if OAuth):
+- `[scope1]`: [Description]
+- `[scope2]`: [Description]
+
+## Versioning
+
+**Strategy**: URL versioning | Header versioning | Content negotiation
+
+**Current Version**: v1
+
+**URL Pattern**: `/v1/[resource]`
+
+**Deprecation Policy**: [How old versions are sunset]
+
+## Endpoints
+
+### [Endpoint 1 Name]
+
+**Operation**: [Create | Read | Update | Delete | Action]
+
+**HTTP Method**: `POST | GET | PUT | PATCH | DELETE`
+
+**Path**: `/v1/[resource]`
+
+**Intent**: [What business operation this enables]
+
+**Request**:
+```http
+POST /v1/orders HTTP/1.1
+Content-Type: application/json
+Authorization: Bearer <token>
+
+{
+  "customerId": "string",
+  "lineItems": [
+    {
+      "productId": "string",
+      "quantity": 1
+    }
+  ]
+}
+```
+
+**Response (Success)**:
+```http
+HTTP/1.1 201 Created
+Location: /v1/orders/550e8400-e29b-41d4-a716-446655440000
+Content-Type: application/json
+
+{
+  "orderId": "550e8400-e29b-41d4-a716-446655440000",
+  "status": "PENDING",
+  "createdAt": "2025-01-15T10:30:00Z"
+}
+```
+
+**Response (Failure)**:
+```http
+HTTP/1.1 400 Bad Request
+Content-Type: application/json
+
+{
+  "error": {
+    "code": "INVALID_REQUEST",
+    "message": "Line items cannot be empty",
+    "field": "lineItems"
+  }
+}
+```
+
+**Status Codes**:
+- `200 OK`: Success (for GET, PUT, PATCH)
+- `201 Created`: Resource created (for POST)
+- `204 No Content`: Success with no body (for DELETE)
+- `400 Bad Request`: Invalid input
+- `401 Unauthorized`: Missing or invalid authentication
+- `403 Forbidden`: Insufficient permissions
+- `404 Not Found`: Resource doesn't exist
+- `409 Conflict`: State conflict (e.g., duplicate)
+- `422 Unprocessable Entity`: Semantic error
+- `500 Internal Server Error`: Server failure
+
+**Idempotency**: [Key: idempotency-key header | command ID in payload]
+
+[Repeat for all endpoints]
+
+## Resources
+
+### [Resource Name 1]
+```json
+{
+  "id": "uuid",
+  "field1": "string",
+  "field2": 42,
+  "createdAt": "ISO 8601",
+  "updatedAt": "ISO 8601"
+}
+```
+
+**Fields**:
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| id | UUID | Yes | Unique identifier |
+| field1 | string | Yes | [Purpose] |
+
+[Repeat for all resources]
+
+## Error Handling
+
+### Standard Error Response
+```json
+{
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human-readable message",
+    "field": "fieldName",
+    "details": {}
+  }
+}
+```
+
+### Error Codes
+| Code | HTTP Status | Description |
+|------|-------------|-------------|
+| INVALID_REQUEST | 400 | Malformed request |
+| UNAUTHORIZED | 401 | Authentication missing/invalid |
+| FORBIDDEN | 403 | Insufficient permissions |
+| NOT_FOUND | 404 | Resource not found |
+
+## Rate Limiting
+
+**Strategy**: Token bucket | Fixed window | Sliding window
+
+**Limits**: 
+- Per User: 1000 requests/hour
+- Per IP: 100 requests/minute
+
+**Headers**:
+```http
+X-RateLimit-Limit: 1000
+X-RateLimit-Remaining: 999
+X-RateLimit-Reset: 1642262400
+```
+
+**Exceeded Response**:
+```http
+HTTP/1.1 429 Too Many Requests
+Retry-After: 3600
+```
+
+## Pagination
+
+**Strategy**: Offset-based | Cursor-based
+
+**Query Parameters**:
+- `limit`: Number of items (default: 20, max: 100)
+- `offset` or `cursor`: Position
+
+**Response**:
+```json
+{
+  "data": [...],
+  "pagination": {
+    "total": 1000,
+    "limit": 20,
+    "offset": 0,
+    "next": "/v1/resource?offset=20"
+  }
+}
+```
+
+## Filtering & Sorting
+
+**Filtering**: `/v1/orders?status=PENDING&customerId=123`
+
+**Sorting**: `/v1/orders?sort=createdAt:desc`
+
+## Webhooks (if applicable)
+
+**Event Subscription**: [How clients subscribe to events]
+
+**Webhook URL**: [Client provides]
+
+**Payload**:
+```json
+{
+  "eventId": "uuid",
+  "eventType": "order.placed",
+  "data": {...},
+  "timestamp": "ISO 8601"
+}
+```
+
+**Retry Policy**: [Exponential backoff, max attempts]
+
+## OpenAPI Specification
+
+See: [Link to openapi.json or openapi.yaml]
+
+## Client Libraries
+
+**Official SDKs**:
+- JavaScript/TypeScript: [Link]
+- Python: [Link]
+- Java: [Link]
+
+## SLA
+
+**Availability**: 99.9% uptime
+
+**Response Time**:
+- p50: < 100ms
+- p95: < 300ms
+- p99: < 1000ms
+
+**Support**: [Support contact or ticketing system]
+
+## Changelog
+
+### v1.0.0 (2025-01-15)
+- Initial release
+- Endpoints: [List]
+
+## Testing
+
+**Sandbox Environment**: `https://sandbox.api.example.com`
+
+**Test Credentials**: [How to obtain]
+
+**Postman Collection**: [Link]
+
+## References
+
+- [Link to bounded context]
+- [Link to commands]
+- [Link to aggregates]
+
+---
+
+# ============================================================
+# FILE: relationship-template.md
+# ============================================================
+---
+title: "Context Relationship: [Upstream] → [Downstream]"
+pattern: "[Pattern Name]"
+version: "1.0.0"
+status: "draft | review | approved"
+---
+
+# Context Relationship: [Upstream Context] → [Downstream Context]
+
+## Pattern
+
+**Type**: Customer-Supplier | Conformist | Shared Kernel | Anti-Corruption Layer | Open Host Service | Published Language
+
+## Participants
+
+**Upstream Context**: [Context Name]
+- **Role**: Provides services/events
+- **Team**: [Team Name]
+
+**Downstream Context**: [Context Name]
+- **Role**: Consumes services/events
+- **Team**: [Team Name]
+
+## Rationale
+
+[Why this relationship exists and why this pattern was chosen]
+
+## Integration Contract
+
+### Type
+[REST API | Events | Shared Library | gRPC | GraphQL]
+
+### Contract Location
+[Link to OpenAPI spec, AsyncAPI spec, or code]
+
+### Version
+Current: v1.0
+
+## Pattern Details
+
+### [Customer-Supplier]
+**Characteristics**:
+- Downstream depends on upstream
+- Upstream provides services
+- Negotiated contract between teams
+- Upstream must consider downstream needs
+
+**Governance**:
+- **Upstream Commitments**: [What upstream guarantees]
+- **Downstream Rights**: [What downstream can influence]
+- **Change Process**: [How changes are negotiated]
+
+### [Conformist]
+**Characteristics**:
+- Downstream conforms to upstream model
+- No negotiation power
+- Upstream changes unilaterally
+
+**Implications**:
+- Downstream must adapt to upstream changes
+- Risk: Breaking changes from upstream
+
+### [Shared Kernel]
+**Characteristics**:
+- Small, carefully managed shared subset
+- Both contexts depend on shared code/model
+- High coordination required
+
+**Shared Elements**:
+- [Shared model classes]
+- [Shared value objects]
+- [Shared utilities]
+
+**Governance**:
+- Changes require consensus
+- Shared codebase or repository
+
+### [Anti-Corruption Layer (ACL)]
+**Characteristics**:
+- Downstream translates upstream concepts
+- Protects downstream from upstream changes
+- Maintains autonomy
+
+**Translation**:
+- Upstream model → ACL → Downstream model
+
+**Components**:
+- Adapters
+- Facades
+- Translators
+
+### [Open Host Service (OHS)]
+**Characteristics**:
+- Upstream provides well-documented, stable API
+- Designed for multiple consumers
+- Versioned and backward compatible
+
+**API**: [Link to API documentation]
+
+### [Published Language]
+**Characteristics**:
+- Standardized integration language
+- Well-documented schemas
+- Often used with OHS
+
+**Schema**: [Link to schema definitions]
+
+## Integration Points
+
+### Data Flow
+[What data flows from upstream to downstream]
+
+### Synchronization
+**Frequency**: Real-time | Batch | Event-driven
+
+**Mechanism**: API calls | Message queue | Shared database (not recommended)
+
+## Contract Details
+
+### Upstream Provides
+
+#### APIs (if applicable)
+- **Endpoint**: `POST /v1/resource`
+- **Purpose**: [What operation]
+- **SLA**: [Response time, availability]
+
+#### Events (if applicable)
+- **Event**: [EventName]
+- **Topic**: `[topic-name]`
+- **Schema**: [Link to schema]
+- **Delivery Guarantee**: At-least-once | Exactly-once
+
+### Downstream Consumes
+
+**Consumption Pattern**: [Polling | Push | Subscribe]
+
+**Error Handling**: [How downstream handles failures]
+
+**Retry Policy**: [Exponential backoff, max attempts]
+
+## Versioning
+
+**Strategy**: [Semantic versioning, backward compatibility]
+
+**Breaking Changes**: [How handled - new version, deprecation period]
+
+**Deprecation Policy**: [Notice period, migration support]
+
+## Governance
+
+**Change Ownership**:
+- **Upstream Can Change**: [What they control]
+- **Downstream Can Influence**: [What they can request]
+
+**Change Process**:
+1. [Proposal]
+2. [Review]
+3. [Approval]
+4. [Implementation]
+5. [Migration]
+
+**Communication Channel**: [Slack, email, meetings]
+
+## Testing
+
+**Contract Tests**: [Pact, Spring Cloud Contract, etc.]
+
+**Test Ownership**:
+- Upstream: Provides contract
+- Downstream: Verifies contract
+
+## Failure Scenarios
+
+| Scenario | Impact on Downstream | Mitigation |
+|----------|----------------------|------------|
+| Upstream API down | [Impact] | [Fallback, cache, circuit breaker] |
+| Upstream breaking change | [Impact] | [Versioning, ACL] |
+| Event delivery failure | [Impact] | [Retry, dead letter queue] |
+
+## SLA
+
+**Upstream Commitments**:
+- Availability: [99.9%]
+- Response Time: [p95 < 200ms]
+- Breaking Change Notice: [30 days]
+
+**Downstream Expectations**:
+- Handle at-least-once delivery
+- Implement retry logic
+- Monitor upstream health
+
+## Evolution
+
+**Current State**: [Description]
+
+**Planned Changes**:
+- [Change 1]
+- [Change 2]
+
+**Migration Plan**: [If pattern or contract is changing]
+
+## References
+
+- [Link to upstream context]
+- [Link to downstream context]
+- [Link to contract specification]
+- [Link to context map]
+
+---
+
+# ============================================================
+# FILE: ubiquitous-language-template.md
+# ============================================================
+---
+title: "Ubiquitous Language: [Bounded Context Name]"
+context: "[Bounded Context Name]"
+version: "1.0.0"
+status: "living document"
+---
+
+# Ubiquitous Language: [Bounded Context Name]
+
+## Purpose
+
+This document defines the shared vocabulary for the [Context Name] bounded context. All team members (developers, domain experts, product owners) must use these terms consistently in code, conversations, and documentation.
+
+## Core Concepts
+
+### [Concept 1]
+**Definition**: [Clear, domain-expert-approved definition]
+
+**Aliases**: [Alternative names, if any]
+
+**Usage**: [How this term is used in conversations and code]
+
+**Examples**:
+- "The [Concept 1] contains..."
+- "When a [Concept 1] is created..."
+
+**Code Representation**: [Class name, aggregate name, entity name]
+
+**Related Terms**: [[Concept 2], [Concept 3]]
+
+---
+
+### [Concept 2]
+**Definition**: [Clear definition]
+
+**NOT to be confused with**: [Similar concept in different context]
+
+**Usage**: [How this term is used]
+
+**Examples**: [Real usage examples]
+
+**Code Representation**: [Class name]
+
+---
+
+[Repeat for all core concepts]
+
+## Verbs & Actions
+
+### [Action 1]
+**Definition**: [What this action means in the domain]
+
+**Who Performs**: [Actor or system]
+
+**Triggers**: [What causes this action]
+
+**Outcome**: [What happens as a result]
+
+**Code**: [Command or method name]
+
+**Example**: "Customer [Action 1]s an order..."
+
+---
+
+[Repeat for all actions]
+
+## States & Lifecycle
+
+### [Entity] Lifecycle
+```
+[State 1] → [State 2] → [State 3]
+```
+
+**State Definitions**:
+- **[State 1]**: [What this state means]
+- **[State 2]**: [What this state means]
+- **[State 3]**: [What this state means]
+
+**Transitions**:
+- [State 1] → [State 2]: [When/why this happens]
+- [State 2] → [State 3]: [When/why this happens]
+
+---
+
+## Business Rules
+
+### Rule: [Rule Name]
+**Statement**: [Natural language business rule]
+
+**Example**: "An order cannot be shipped if payment has not been authorized"
+
+**Invariant**: [Formal statement]
+
+**Enforced By**: [Aggregate, policy, or domain service]
+
+---
+
+[Repeat for key business rules]
+
+## Value Objects
+
+### [Value Object Name]
+**Definition**: [What this represents]
+
+**Attributes**: [Fields]
+
+**Immutable**: Yes
+
+**Examples**: 
+- Money(100, "USD")
+- Address("123 Main St", "Springfield", "IL", "62701")
+
+---
+
+## Domain Events
+
+### [EventName]
+**Definition**: [What happened - past tense]
+
+**Triggered By**: [Command or action]
+
+**Significance**: [Why this event matters]
+
+**Usage**: "When [EventName] occurs, then..."
+
+---
+
+[Repeat for key events]
+
+## Context-Specific Meanings
+
+Sometimes terms have different meanings in different contexts. Clarify here:
+
+| Term | In This Context | In [Other Context] |
+|------|-----------------|---------------------|
+| [Term1] | [Meaning A] | [Meaning B] |
+
+## Glossary
+
+| Term | Type | Definition | Code |
+|------|------|------------|------|
+| [Term 1] | Entity | [Definition] | [ClassName] |
+| [Term 2] | Value Object | [Definition] | [ClassName] |
+| [Term 3] | Aggregate | [Definition] | [ClassName] |
+| [Term 4] | Command | [Definition] | [CommandName] |
+| [Term 5] | Event | [Definition] | [EventName] |
+
+## Forbidden Terms
+
+Terms we intentionally avoid because they're ambiguous or from a different context:
+
+- ❌ **[Term X]**: Use [Term Y] instead
+- ❌ **[Term Z]**: This is from [Other Context]; not used here
+
+## Evolution
+
+**Last Updated**: 2025-01-15
+
+**Recent Changes**:
+- [Date]: Added [Term]
+- [Date]: Clarified [Term]
+
+**Open Discussions**:
+- [Question about term or concept]
+
+## References
+
+- [Link to domain expert contact]
+- [Link to bounded context documentation]
+- [Link to code repository]
+
+---
+
+# ============================================================
+# FILE: consistency-template.md
+# ============================================================
+---
+title: "Consistency Model: [Bounded Context Name]"
+context: "[Bounded Context Name]"
+version: "1.0.0"
+---
+
+# Consistency Model: [Bounded Context Name]
+
+## Overview
+
+[High-level description of consistency strategy for this bounded context]
+
+## Consistency Guarantees
+
+### Within Aggregate
+**Model**: Strong Consistency
+
+**Mechanism**: Single database transaction
+
+**Scope**: Aggregate root + all child entities/value objects
+
+**ACID Properties**: ✅ Atomicity, ✅ Consistency, ✅ Isolation, ✅ Durability
+
+**Example**:
+```
+Order aggregate:
+- Order (root)
+- OrderLines (children)
+- Updated atomically in single transaction
+- All invariants enforced before commit
+```
+
+### Across Aggregates (Same Context)
+**Model**: Eventual Consistency
+
+**Mechanism**: Domain events + event handlers (policies/sagas)
+
+**Timing**: [Immediate after transaction | Async via message queue]
+
+**Example**:
+```
+OrderPlaced event
+→ (eventually) triggers ReserveInventory
+→ (eventually) StockReserved event
+```
+
+### Across Bounded Contexts
+**Model**: Eventual Consistency (always)
+
+**Mechanism**: Published domain events via message broker
+
+**Delivery Guarantee**: At-least-once
+
+**Idempotency**: Required in all consumers
+
+**Example**:
+```
+Order Context: OrderPlaced event
+→ Inventory Context: ReserveStock command
+→ Payment Context: AuthorizePayment command
+```
+
+## Transaction Boundaries
+
+### Transaction 1: [Name]
+**Scope**: [What's included]
+
+**Aggregates Involved**: [[Aggregate1]]
+
+**Duration**: [Expected duration]
+
+**Example**:
+```sql
+BEGIN TRANSACTION;
+  -- Update Order
+  -- Update OrderLines
+  -- Add OrderPlaced event to outbox
+COMMIT;
+```
+
+### Transaction 2: [Name]
+[Repeat for each transaction boundary]
+
+## Event-Driven Consistency
+
+### Transactional Outbox Pattern
+**Problem**: Ensure events are published reliably after transaction commit
+
+**Solution**: Store events in database table (outbox) in same transaction
+
+**Process**:
+1. Business logic updates aggregates
+2. Domain events written to `outbox` table
+3. Transaction commits
+4. Background worker polls outbox and publishes to message broker
+5. Events marked as published
+
+**Outbox Table**:
+```sql
+CREATE TABLE outbox (
+  event_id UUID PRIMARY KEY,
+  aggregate_id UUID NOT NULL,
+  event_type VARCHAR(255) NOT NULL,
+  payload JSONB NOT NULL,
+  created_at TIMESTAMP NOT NULL,
+  published_at TIMESTAMP
+);
+```
+
+### Event Sourcing (if applicable)
+**Store**: All state changes as events
+
+**Replay**: Rebuild aggregate state by replaying events
+
+**Consistency**: Strong consistency within event store; eventual elsewhere
+
+## Idempotency
+
+### Commands
+**Idempotency Key**: [commandId | custom key in payload]
+
+**Implementation**: Store processed command IDs; reject duplicates
+
+**Example**:
+```typescript
+if (await processedCommands.exists(command.commandId)) {
+  return cached result;
+}
+// Execute command
+await processedCommands.add(command.commandId, result);
+return result
