@@ -18,6 +18,16 @@ Make Copilot productive in this Spec‑Driven Development (SpecKit) template by 
 > [!TIP]
 > See also: `AGENTS.md` (cross‑agent guidance) and `README.md` (project overview).
 
+## Instruction references
+
+- Always adhere to the repository instruction docs in `.github/instructions/`:
+	- `.github/instructions/markdown.instructions.md` — Markdown content and formatting
+		rules (front matter, headings, lists, tables, admonitions).
+	- `.github/instructions/instructions.instructions.md` — Process/guardrails for
+		creating and maintaining instruction documents.
+- If guidance here ever conflicts with the instruction docs, the files in
+	`.github/instructions/` take precedence; update this document to align.
+
 ## Big picture
 - Spec‑driven flow: feature spec → plan → tasks → implement; each feature lives in `specs/<feature-branch>/` (created by scripts).
 - Feature folder is keyed by current branch; enforced naming `NNN-feature-name` (see `.specify/scripts/bash/common.sh`).
@@ -54,6 +64,8 @@ Make Copilot productive in this Spec‑Driven Development (SpecKit) template by 
 - Preserve template heading order; remove placeholders only as templates instruct.
 - Prefer updating artifacts via `/speckit.*` commands to keep phases in sync.
 - If a prerequisite artifact/folder is missing, guide the user to run the preceding command rather than bypassing the flow.
+ - Respect the instruction docs in `.github/instructions/*`; they govern formatting
+	 and maintenance of markdown and instruction content.
 
 > [!NOTE]
 > For cross‑agent coordination patterns and troubleshooting, refer to `AGENTS.md`.
@@ -71,7 +83,9 @@ Use semantic versioning for this document to signal impact on agent behavior.
 1. Update the version reference in `post_title` if present (e.g., “Copilot Instructions — SpecKit Template vX.Y.Z”).
 2. Add a dated entry under the Changelog below.
 3. Ensure cross‑references with `README.md` and `AGENTS.md` remain accurate.
-4. Keep headings at H2/H3 and follow `.github/instructions/markdown.instructions.md`.
+4. Keep headings at H2/H3 and follow the instruction docs under
+	`.github/instructions/` (especially `markdown.instructions.md` and
+	`instructions.instructions.md`).
 
 ### Changelog
 
