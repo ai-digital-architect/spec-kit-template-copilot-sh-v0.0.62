@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom JP Morgan brand colors - matching original prototypes */
+:root {
+  --jp-blue: #005596;
+  --jp-light-blue: #0066cc;
+  --jp-dark: #1a1a1a;
+  --jp-gray: #666666;
+  --header-height: 64px;
+  --dev-banner-height: 32px;
+}
+
+/* Custom utility classes */
+@layer utilities {
+  .jp-blue-bg {
+    background-color: var(--jp-blue);
+  }
+  
+  .jp-light-blue-bg {
+    background-color: var(--jp-light-blue);
+  }
+  
+  .jp-blue {
+    color: var(--jp-blue);
+  }
+  
+  .jp-light-blue {
+    color: var(--jp-light-blue);
+  }
+
+  .hero-gradient {
+    background: linear-gradient(135deg, var(--jp-blue) 0%, var(--jp-light-blue) 100%);
+  }
+
+  .jp-light-gray-bg {
+    background-color: #f8f9fa;
+  }
+
+  .card-hover {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Navigation Dropdown Styles */
+  .dropdown {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--header-height, 64px);
+    transform: translateY(-5px);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  /* Bridge element to maintain hover state */
+  .nav-item::before {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 30px;
+    background: transparent;
+    z-index: 999;
+  }
+
+  /* When development banner is present */
+  .has-dev-banner .dropdown {
+    top: calc(var(--header-height, 64px) + var(--dev-banner-height, 32px));
+  }
+
+  .dropdown.show {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
+
+  /* Hover trigger for dropdowns - works with React state */
+  .nav-item:hover .dropdown {
+    /* Don't override visibility - let React state handle it */
+    /* Just reduce delay for better UX */
+  }
+
+  /* Mobile Menu Styles */
+  .mobile-menu {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .mobile-menu.show {
+    transform: translateX(0);
+  }
+
+  @media (max-width: 768px) {
+    .hero-title { font-size: 2rem; }
+    .hero-subtitle { font-size: 1.125rem; }
+  }
+}
