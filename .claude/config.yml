@@ -1,0 +1,35 @@
+version: "1.0"
+
+# Default settings
+defaults:
+  chat_mode: "default"
+  auto_load_skills: true
+  memory_enabled: true
+  
+# Skills configuration
+skills:
+  auto_discover: true
+  directories:
+    - "skills/project"
+    - "skills/shared"
+  priority_order:
+    - "project"
+    - "shared"
+
+# Chat modes
+chat_modes:
+  default: "chat-modes/default.yml"
+  debug: "chat-modes/debug.yml"
+  review: "chat-modes/code-review.yml"
+
+# Context settings
+context:
+  always_include:
+    - "context/architecture.md"
+    - "claude-instructions.md"
+  max_tokens: 50000
+  
+# Workflows
+workflows:
+  enabled: true
+  directory: "workflows"

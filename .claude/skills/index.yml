@@ -1,0 +1,36 @@
+skills:
+  project:
+    - name: "architecture"
+      path: "skills/project/architecture/SKILL.md"
+      description: "Project architecture and design patterns"
+      triggers:
+        - "architecture"
+        - "design"
+        - "system structure"
+        - "how things work"
+      
+    - name: "domain-knowledge"
+      path: "skills/project/domain-knowledge/SKILL.md"
+      description: "Business domain and terminology"
+      triggers:
+        - "business logic"
+        - "domain"
+        - "business rules"
+        
+    - name: "api-patterns"
+      path: "skills/project/api-patterns/SKILL.md"
+      description: "API design patterns and conventions"
+      triggers:
+        - "api"
+        - "endpoint"
+        - "route"
+
+  shared:
+    - name: "testing-best-practices"
+      path: "skills/shared/testing-best-practices/SKILL.md"
+      description: "Testing strategies and best practices"
+      triggers:
+        - "test"
+        - "testing"
+        - "unit test"
+        - "integration test"

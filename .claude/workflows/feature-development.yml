@@ -1,0 +1,65 @@
+name: "Feature Development Workflow"
+description: "End-to-end workflow for developing a new feature"
+
+steps:
+  - step: 1
+    name: "Requirements Analysis"
+    prompt: |
+      Let's analyze the feature requirements. I'll help you:
+      1. Clarify the feature scope
+      2. Identify affected components
+      3. List technical requirements
+      4. Note potential challenges
+    outputs:
+      - requirements_doc
+      - component_list
+      - technical_considerations
+      
+  - step: 2
+    name: "Design & Architecture"
+    prompt: |
+      Now let's design the solution:
+      1. Component structure
+      2. Data models needed
+      3. API endpoints required
+      4. State management approach
+    uses_skills:
+      - "skills/project/architecture"
+    outputs:
+      - design_document
+      - file_structure
+      
+  - step: 3
+    name: "Implementation Planning"
+    prompt: |
+      Let's break down the implementation:
+      1. Create task list
+      2. Estimate complexity
+      3. Identify dependencies
+      4. Plan testing strategy
+    outputs:
+      - task_list
+      - testing_plan
+      
+  - step: 4
+    name: "Code Generation"
+    prompt: |
+      I'll help generate the code for each component.
+      Should I start with:
+      - Database models
+      - API routes
+      - Services
+      - UI components
+    interactive: true
+    
+  - step: 5
+    name: "Testing & Documentation"
+    prompt: |
+      Let's create tests and documentation:
+      1. Unit tests
+      2. Integration tests
+      3. API documentation
+      4. Component documentation
+    outputs:
+      - test_files
+      - documentation
